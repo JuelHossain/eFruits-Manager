@@ -9,7 +9,7 @@ import Header from './Components/Shared/Header/Header';
 
 function App() {
   return (
-    <div className='mx-auto'>
+    <div className='container mx-auto text-stone-500'>
       <Header></Header>
       <Routes>
         <Route path='/' element={<Home></Home>}></Route>

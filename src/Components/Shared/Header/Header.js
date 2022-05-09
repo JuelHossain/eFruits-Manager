@@ -12,40 +12,43 @@ const Header = () => {
   };
   const [user] = useAuthState(auth);
   return (
-    <div className="flex justify-between items-center m-4 bg-black text-white p-2">
-      <nav className="flex gap-4">
+    <div className="flex justify-between items-center  bg-stone-900 text-white px-4 py-2">
+      <nav className="flex gap-4 w-1/3">
         <Link to="/">Home</Link>
         <Link to="Products">Products</Link>
       </nav>
-      <div className="logo">
+      <div className="w-1/3 flex justify-center">
         <Link to={"/"}>
           <img className="h-10 " src={logo} alt="logo" />
         </Link>
       </div>
-      <div className="authentication">
-        {user ? (
-          <div className="flex gap-2 items-center">
-            <div>
-              <p>Admin</p>
-              <p className="text-right">{user.displayName}</p>
-            </div>
-            {user.photoURL ? (
-              <img className="h-8" src={user.photoURL} alt="user" />
-            ) : (
-              <UserIcon className="h-8"></UserIcon>
-            )}
+      <div className="w-1/3">
+        <>
+          {user ? (
+            <div className="flex gap-2 items-center justify-end">
+              <div>
+                <p className="text-right text-xl">{user.displayName}</p>
+              </div>
+              {user.photoURL ? (
+                <img className="h-8" src={user.photoURL} alt="user" />
+              ) : (
+                <UserIcon className="h-8"></UserIcon>
+              )}
 
-            <button onClick={logout} >
-              <LogoutIcon className="h-8"></LogoutIcon>
-            </button>
-          </div>
-        ) : (
-            <div className="flex
-          gap-2">
-            <Link to={"/register"}>Register</Link>/
-            <Link to={"/login"}>Login</Link>
-          </div>
-        )}
+              <button onClick={logout}>
+                <LogoutIcon className="h-8"></LogoutIcon>
+              </button>
+            </div>
+          ) : (
+            <div
+              className="flex
+          gap-2 justify-end"
+            >
+              <Link to={"/register"}>Register</Link>/
+              <Link to={"/login"}>Login</Link>
+            </div>
+          )}
+        </>
       </div>
     </div>
   );
