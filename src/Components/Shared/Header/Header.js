@@ -4,8 +4,8 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase";
 import { LogoutIcon, UserIcon } from "@heroicons/react/outline";
 import { signOut } from "firebase/auth";
-import CustomLink from "../../../Utilities/CustomLInk/CustomLink";
 import { Link } from "react-router-dom";
+import CustomLink from "../CustomLInk/CustomLink";
 
 const Header = () => {
   const logout = () => {
@@ -37,13 +37,14 @@ const Header = () => {
             <img className="w-full h-auto" src={logo} alt="logo" />
           </Link>
         </div>
-        <div className="w-1/3 flex justify-center items-center gap-2">
-          <nav className="flex w-1/2 justify-end">
-            <CustomLink className="hover:bg-pink-500  border-x  p-4" to="/addfruits">
+        <div className="w-1/3 ">
+          <div className="flex justify-center items-center gap-2">
+            <CustomLink
+              className="hover:bg-pink-500  border-x  p-4"
+              to="/addfruits"
+            >
               AddFruits
             </CustomLink>
-          </nav>
-          <div className="w-2/3">
             {user ? (
               <div className="flex gap-2 items-center justify-end">
                 <div>
