@@ -9,7 +9,7 @@ const Addfruits = () => {
       e.preventDefault();
       const name = e.target.name.value;
       const price = e.target.price.value;
-    const photo = e.target.photoURL.value;
+    const photo = e.target.photo.value;
     const qty = e.target.quantity.value;
     const supplier = e.target.supplier.value;
     const description = e.target.description.value;
@@ -26,8 +26,9 @@ const Addfruits = () => {
         .then((res) => res.json())
         .then((data) => {
           console.log("success", data);
+          e.target.reset();
         });
-              
+
     }
     return (
       <div className=" container mx-auto text-center m-20">
@@ -45,12 +46,14 @@ const Addfruits = () => {
             />
             <input
               className={inputStyle}
+              type="number"
               name="price"
               placeholder="Price"
             />
 
             <input
               className={inputStyle}
+              type="number"
               name="quantity"
               placeholder="Quantity"
             />
@@ -68,7 +71,7 @@ const Addfruits = () => {
 
             <input
               className={inputStyle}
-              type="textarea"
+              type="textArea"
               name="description"
               placeholder="Description"
             />

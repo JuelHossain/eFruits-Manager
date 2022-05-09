@@ -21,7 +21,7 @@ const Header = () => {
           </CustomLink>
           <CustomLink
             className="hover:bg-pink-500  border-l  p-4"
-            to="/products"
+            to="/fruits"
           >
             Fruits
           </CustomLink>
@@ -38,7 +38,7 @@ const Header = () => {
           </Link>
         </div>
         <div className="w-1/3 ">
-          <div className="flex justify-center items-center gap-2">
+          <div className="flex justify-end items-center gap-2">
             <CustomLink
               className="hover:bg-pink-500  border-x  p-4"
               to="/addfruits"

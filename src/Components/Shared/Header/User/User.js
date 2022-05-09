@@ -13,7 +13,7 @@ const User = () => {
 
     }
     return (
-      <div className="container flex flex-col items-center justify-center m-20 p-10">
+      <div className="container flex flex-col items-center justify-center m-20 p-10 mx-auto">
         <form
           className=" w-[500px] pb-10 flex flex-col justify-center items-center shadow-2xl"
           onSubmit={handleUpdate}
