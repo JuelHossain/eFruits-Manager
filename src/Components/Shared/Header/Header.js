@@ -37,8 +37,13 @@ const Header = () => {
             <img className="w-full h-auto" src={logo} alt="logo" />
           </Link>
         </div>
-        <div className="w-1/3">
-          <>
+        <div className="w-1/3 flex justify-center items-center gap-2">
+          <nav className="flex w-1/2 justify-end">
+            <CustomLink className="hover:bg-pink-500  border-x  p-4" to="/addfruits">
+              AddFruits
+            </CustomLink>
+          </nav>
+          <div className="w-2/3">
             {user ? (
               <div className="flex gap-2 items-center justify-end">
                 <div>
@@ -82,7 +87,7 @@ const Header = () => {
                 </Link>
               </div>
             )}
-          </>
+          </div>
         </div>
       </div>
     </header>

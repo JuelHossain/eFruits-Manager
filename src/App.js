@@ -7,10 +7,11 @@ import Register from './Components/Authentication/Register/Register';
 import RequireAuth from './Components/Authentication/RequireAuth/RequireAuth';
 import Home from './Components/Home/Home';
 import Inventory from './Components/Inventory/Inventory';
-import Products from './Components/Products/Products';
+import Products from './Components/Fruits/Fruits';
 import Footer from './Components/Shared/Footer/Footer';
 import Header from './Components/Shared/Header/Header';
 import User from './Components/Shared/Header/User/User';
+import Addfruits from './Components/Fruits/AddFruits/Addfruits';
 
 function App() {
   return (
@@ -31,6 +32,14 @@ function App() {
         <Route path="/user" element={<User></User>}></Route>
         <Route path="/login" element={<Login></Login>}></Route>
         <Route path="/inventory" element={<Inventory></Inventory>}></Route>
+        <Route
+          path="/addfruits"
+          element={
+            <RequireAuth>
+              <Addfruits></Addfruits>
+            </RequireAuth>
+          }
+        ></Route>
       </Routes>
       <ToastContainer></ToastContainer>
       <Footer></Footer>
