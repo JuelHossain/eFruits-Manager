@@ -27,14 +27,22 @@ const Header = () => {
           {user ? (
             <div className="flex gap-2 items-center justify-end">
               <div>
-                <p className="text-right text-xl">{user.displayName}</p>
+                <Link to={"/user"} className="text-right text-xl">
+                  {user.displayName}
+                </Link>
               </div>
-              {user.photoURL ? (
-                <img className="h-8" src={user.photoURL} alt="user" />
-              ) : (
-                <UserIcon className="h-8"></UserIcon>
-              )}
-
+              <Link className="relative" to={"/user"}>
+                <span className="animate-ping absolute  h-full w-full rounded-full bg-sky-400 opacity-50"></span>
+                {user.photoURL ? (
+                  <img
+                    className="relative rounded-full h-8 "
+                    src={user.photoURL}
+                    alt="user"
+                  />
+                ) : (
+                  <UserIcon className="h-8"></UserIcon>
+                )}
+              </Link>
               <button onClick={logout}>
                 <LogoutIcon className="h-8"></LogoutIcon>
               </button>

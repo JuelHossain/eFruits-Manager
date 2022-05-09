@@ -40,6 +40,7 @@ const Register = () => {
 if (user || googleUser) {
   navigate("/");
   window.location.reload(true);
+  console.log(user);
 } else if (loading || updating || googleLoading) {
   return <Loading></Loading>;
 } else if (error || updateError || googleError) {

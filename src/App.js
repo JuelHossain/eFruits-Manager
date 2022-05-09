@@ -6,6 +6,7 @@ import Register from './Components/Authentication/Register/Register';
 import Home from './Components/Home/Home';
 import Products from './Components/Products/Products';
 import Header from './Components/Shared/Header/Header';
+import User from './Components/Shared/Header/User/User';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path='/home' element={<Home></Home>}></Route>
         <Route path='/products' element={<Products></Products>}></Route>
         <Route path='/register' element={<Register></Register>}></Route>
+        <Route path='/user' element={<User></User>}></Route>
       </Routes>
       <ToastContainer></ToastContainer>
     </div>
