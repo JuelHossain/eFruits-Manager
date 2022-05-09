@@ -10,12 +10,14 @@ import googlelogo from "../../../googlelogo.png";
   import "react-toastify/dist/ReactToastify.css";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import Loading from "../../Shared/Loading/Loading";
+import { LockClosedIcon, LockOpenIcon } from "@heroicons/react/outline";
+import "react-toastify/dist/ReactToastify.minimal.css";
 
 const Register = () => {
   //styles
-  const inputStyle = "border m-2 p-2 w-96";
+  const inputStyle = "border m-2 p-2 w-96 focus:outline-0 focus:animate-pulse";
   const inputButton =
-    "border m-2 p-2 w-96 hover:bg-pink-600 hover:text-pink-100 ease-in-out duration-300 flex items-center justify-center gap-2";
+    "border m-2 p-2 w-96 hover:bg-pink-600 hover:text-pink-100 ease-in-out duration-300 flex items-center justify-center gap-2 focus:animate-pulse";
 
   // states 
   const [showPass, setShowPass] = useState(false);
@@ -41,9 +43,7 @@ if (user || googleUser) {
   navigate("/");
   window.location.reload(true);
   console.log(user);
-} else if (loading || updating || googleLoading) {
-  return <Loading></Loading>;
-} else if (error || updateError || googleError) {
+}else if (error || updateError || googleError) {
   toast.error(error.toString().slice(37, -2));
 } else {
   console.clear();
@@ -72,10 +72,15 @@ if (user || googleUser) {
     }
   };
   return (
-    <div className="text-center m-20">
-      <p className="m-2 text-xl text-pink-600">Please Register</p>
-      <div className="flex flex-col gap-3 justify-center items-center">
-        <form onSubmit={handleRegister}>
+    <div className=" container mx-auto text-center m-20">
+      <div className=" mx-auto p-6 w-[500px] h-[700px] shadow-2xl flex flex-col gap-3 justify-center items-center ">
+        {loading || updating || googleLoading ? (
+          <LockOpenIcon className="bg-pink-100 h-10 p-2 rounded-full"></LockOpenIcon>
+        ) : (
+          <LockClosedIcon className="bg-pink-100 h-10 p-2 rounded-full"></LockClosedIcon>
+        )}
+        <p className="m-2 text-xl text-pink-600">Please Register</p>
+        <form className="" onSubmit={handleRegister}>
           <input
             className={inputStyle}
             ref={nameRef}
@@ -150,7 +155,12 @@ if (user || googleUser) {
             <p>Login With Google</p>
           </button>
         </div>
-        <Link className="border-b pb-2 border-amber-500 hover:text-amber-500" to={'/login'}>Already Registered?</Link>
+        <Link
+          className="border-b pb-2 border-amber-500 hover:text-amber-500"
+          to={"/login"}
+        >
+          Already Registered?
+        </Link>
       </div>
     </div>
   );
