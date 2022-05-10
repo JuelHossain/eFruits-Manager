@@ -13,7 +13,7 @@ const Header = () => {
   };
   const [user] = useAuthState(auth);
   return (
-    <header className="flex justify-center bg-stone-900 sticky top-0 h-14 font-semibold">
+    <header className="flex justify-center bg-stone-900 sticky top-0 h-14 font-semibold z-40 shadow-md shadow-stone-500">
       <div className="container flex justify-between items-center  bg-stone-900 text-white px-4 py-2">
         <nav className="flex w-1/3">
           <CustomLink className="hover:bg-pink-500  border-l  p-4" to="/">

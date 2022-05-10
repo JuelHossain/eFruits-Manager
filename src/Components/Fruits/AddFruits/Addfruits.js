@@ -11,9 +11,10 @@ const Addfruits = () => {
       const price = e.target.price.value;
     const photo = e.target.photo.value;
     const qty = e.target.quantity.value;
+    const weight = e.target.weight.value;
     const supplier = e.target.supplier.value;
     const description = e.target.description.value;
-    const fruit = { name, price, photo, qty, supplier, description };
+    const fruit = { name, price, photo, qty, weight,supplier, description };
     
       //sending data to the server
       fetch("http://localhost:5000/fruits", {
@@ -28,13 +29,13 @@ const Addfruits = () => {
           console.log("success", data);
           e.target.reset();
         });
-
     }
     return (
       <div className=" container mx-auto text-center m-20">
         <div className=" mx-auto p-6 w-[500px] h-[700px] shadow-2xl flex flex-col gap-2 justify-center items-center ">
           <p className="m-2 text-xl text-pink-600">Add Fruit to Inventory</p>
           <form
+            required
             className="flex flex-col text-center"
             onSubmit={addFruits}
           >
@@ -56,6 +57,12 @@ const Addfruits = () => {
               type="number"
               name="quantity"
               placeholder="Quantity"
+            />
+            <input
+              className={inputStyle}
+              type="text"
+              name="weight"
+              placeholder="Weight"
             />
             <input
               className={inputStyle}

@@ -6,10 +6,12 @@ const Fruits = () => {
     const [fruits] = useFruits();
     console.log(fruits);
     return (
-      <div className="container mx-auto text-center m-20 shadow-2xl py-8">
-        <h1 className="text-4xl text-center mb-8">Fruits-Available</h1>
+      <div className="container m-auto text-center mt-10 mb-20 p-10 shadow-2xl">
+        <h1 className="text-4xl text-center mb-10">Fruits-Available</h1>
         <div className="flex justify-center">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:grid-cols-2">
+          <div className="grid grid-cols-1 
+          sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3
+          2xl:grid-cols-4 gap-4">
             {fruits.map((fruit) => (
               <FruitCard
                 key={fruit._id}
@@ -19,6 +21,7 @@ const Fruits = () => {
                 photo={fruit.photo}
                 supplier={fruit.supplier}
                 description={fruit.description}
+                weight={fruit.weight}
               ></FruitCard>
             ))}
           </div>

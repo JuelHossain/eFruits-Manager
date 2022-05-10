@@ -1,21 +1,49 @@
+import { CurrencyBangladeshiIcon } from '@heroicons/react/outline';
 import React from 'react';
 
-const FruitCard = ({name,price,qty,photo,supplier,description}) => {
+
+const FruitCard = ({name,price,qty,weight,photo,supplier,description}) => {
     return (
-      <div className="w-80 p-2 rounded border flex-col space-between shadow-2xl">
-        <div className='relative h-72 border rounded'>
-          <img className='w-full h-full object-cover' src={photo} alt={name} />
-          <p className="absolute bottom-0 w-full bg-stone-500 p-2 text-2xl opacity-40 text-white font-semibold">{name}</p>
+      <div className="w-80 p-2 rounded border flex-col space-between shadow-2xl  ">
+        {/* photo and name */}
+        <div className="relative h-72 border rounded">
+          <img
+            className="rounded w-full h-full object-cover"
+            src={photo}
+            alt={name}
+          />
+          <p className="absolute h-14 bottom-0 w-full bg-stone-900 flex items-center justify-center text-2xl opacity-50 text-white font-semibold">
+            {name}
+          </p>
         </div>
-        <div className='flex justify-between items-center'>
-          <p className='w-3/5 text-xl border p-2'>Price: {price}</p>
-          <p className='w-2/5 text-xl border p-2'>{qty}</p>
-            </div>
-            <div >
-                <p className=' rounded p-2 border text-lg'>Supplier: {supplier}</p>
-                <p className='text-left p-2 text-justify'>{description.substr(0,100)}</p>
-            </div>
-            <button className='bg-pink-500 w-full p-2 text-white font-semibold text-xl rounded hover:bg-amber-600'>Manage</button>
+        {/* weight price quantity */}
+        <div className="flex my-1 border justify-between items-center rounded ">
+          <p className="w-2/6 text-xl border-r h-12 flex items-center justify-center">
+            {weight ? weight : "1kg"}
+          </p>
+          <p className="w-2/6 text-xl border-r h-12 flex items-center justify-center ">
+            {price}
+            <CurrencyBangladeshiIcon className="w-4 inline" />
+          </p>
+          <p className="w-2/6 text-xl h-12 flex items-center justify-center">
+            {qty}
+            <small>
+              {weight?.toLowerCase().includes("p" || "e") ? "pcs" : "kg"}
+            </small>
+          </p>
+        </div>
+        {/* supplier and description  */}
+        <div>
+          <p className=" rounded h-12 flex items-center justify-center border text-lg">
+            Supplier: {supplier}
+          </p>
+            <p className="text-left px-1 text-justify h-24 overflow-hidden hover:overflow-auto border my-1 rounded snap-stop">
+              {description}
+            </p>
+        </div>
+        <button className="bg-pink-500 w-full flex - items-center justify-center h-12 text-white font-semibold text-xl rounded hover:bg-amber-600 ">
+          Manage
+        </button>
       </div>
     );
 };
