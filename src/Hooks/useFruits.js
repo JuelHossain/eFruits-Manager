@@ -7,6 +7,6 @@ const useFruits = () => {
             .then(res => res.json())
             .then(data => setFruits(data))
     }, [])
-    return [fruits];
+    return [fruits,setFruits];
 }
 export default useFruits;
