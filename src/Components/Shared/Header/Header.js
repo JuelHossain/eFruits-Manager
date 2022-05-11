@@ -19,10 +19,7 @@ const Header = () => {
           <CustomLink className="hover:bg-pink-500  border-l  p-4" to="/">
             Home
           </CustomLink>
-          <CustomLink
-            className="hover:bg-pink-500  border-l  p-4"
-            to="/fruits"
-          >
+          <CustomLink className="hover:bg-pink-500  border-l  p-4" to="/fruits">
             Fruits
           </CustomLink>
           <CustomLink

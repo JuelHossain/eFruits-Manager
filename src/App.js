@@ -12,6 +12,7 @@ import Footer from './Components/Shared/Footer/Footer';
 import Header from './Components/Shared/Header/Header';
 import User from './Components/Shared/Header/User/User';
 import Addfruits from './Components/Fruits/AddFruits/Addfruits';
+import ManageFruits from './Components/Fruits/ManageFruits/ManageFruits';
 
 function App() {
   return (
@@ -31,7 +32,14 @@ function App() {
         <Route path="/register" element={<Register></Register>}></Route>
         <Route path="/user" element={<User></User>}></Route>
         <Route path="/login" element={<Login></Login>}></Route>
-        <Route path="/inventory" element={<Inventory></Inventory>}></Route>
+        <Route
+          path="/inventory"
+          element={
+            <RequireAuth>
+              <Inventory></Inventory>
+            </RequireAuth>
+          }
+        ></Route>
         <Route
           path="/addfruits"
           element={
@@ -40,6 +48,7 @@ function App() {
             </RequireAuth>
           }
         ></Route>
+        <Route path="/update/:id" element={<ManageFruits></ManageFruits>}></Route>
       </Routes>
       <ToastContainer></ToastContainer>
       <Footer></Footer>

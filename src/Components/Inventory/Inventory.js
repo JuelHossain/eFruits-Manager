@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import useFruits from "../../Hooks/useFruits";
 import InventoryList from "./InventoryList";
 
@@ -7,7 +7,18 @@ const Inventory = () => {
   const handleRemove = (_id) => {
     const proceed = window.confirm();
     if (proceed) {
+      const url = `http://localhost:5000/fruits/${_id}`;
+      fetch(url, {
+        method: 'DELETE'
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.deletedCount > 0) {
+          console.log("deleted successfully")
+          }
+        });
       setFruits(fruits.filter(fruit => fruit._id !== _id));
+
     }
   }
   console.log(fruits);

@@ -1,8 +1,7 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef,} from 'react';
 
-const Confirm = () => {
-    const [confirm, setConfirm] = useState(false);
-    const confirmRef = useRef()
+const Confirm = ({ confirm, setConfirm }) => {
+    const confirmRef = useRef();
     return (
         <div ref={confirmRef} className='fixed left-0 top-0 w-full h-full bg-stone-100 overflow-hidden z-2 flex justify-center items-center'>
             <div className=" flex flex-col w-96 h-28 bg-stone-900 mx-auto  rounded-2xl shadow-xl items-center justify-center gap-2">

@@ -1,8 +1,8 @@
 import { MinusIcon, PlusIcon, TrashIcon } from "@heroicons/react/outline";
 import React, { useRef, useState } from "react";
-
+import Confirm from "../../utilites/Confirm/Confirm";
 const InventoryList = ({ _id, name, price, qty, weight, photo, remove }) => {
-  const [showConfirm, setShowConfirm] = useState(false);
+  // const [showConfirm, setShowConfirm] = useState(false);
   const [newPrice, setNewPrice] = useState(price);
   const [newQty, setNewQty] = useState(qty);
   const per = weight?.toLowerCase().includes("p" || "e") ? "Pcs" : "Kg";
@@ -180,6 +180,7 @@ const InventoryList = ({ _id, name, price, qty, weight, photo, remove }) => {
         <button
           className="w-8 flex justify-end hover:text-red-500"
           onClick={() => {
+            // setShowConfirm(true);
             remove(_id);
             console.log(_id);
           }}
@@ -187,6 +188,7 @@ const InventoryList = ({ _id, name, price, qty, weight, photo, remove }) => {
           <TrashIcon className="h-8"></TrashIcon>
         </button>
       </td>
+      {/* {showConfirm&& <Confirm></Confirm>} */}
     </tr>
   );
 };

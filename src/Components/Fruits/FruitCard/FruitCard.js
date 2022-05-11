@@ -1,8 +1,9 @@
 import { CurrencyBangladeshiIcon } from '@heroicons/react/outline';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 
-const FruitCard = ({name,price,qty,weight,photo,supplier,description}) => {
+const FruitCard = ({_id,name,price,qty,weight,photo,supplier,description}) => {
     return (
       <div className="w-80 p-2 rounded border flex-col space-between shadow-2xl  ">
         {/* photo and name */}
@@ -41,9 +42,9 @@ const FruitCard = ({name,price,qty,weight,photo,supplier,description}) => {
               {description}
             </p>
         </div>
-        <button className="bg-pink-500 w-full flex - items-center justify-center h-12 text-white font-semibold text-xl rounded hover:bg-amber-600 ">
+        <Link to={`/update/${_id}` }className="bg-pink-500 w-full flex - items-center justify-center h-12 text-white font-semibold text-xl rounded hover:bg-amber-600 ">
           Manage
-        </button>
+        </Link>
       </div>
     );
 };
