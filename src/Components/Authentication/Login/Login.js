@@ -26,7 +26,7 @@ const Login = () => {
   const [showPass, setShowPass] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  //react-firebase-hookd
+  //react-firebase-hook
   const [sendPasswordResetEmail, sending,] =
     useSendPasswordResetEmail(auth);
   const [signInWithEmailAndPassword, user, loading, error] =
