@@ -1,18 +1,22 @@
+import { PlusIcon } from '@heroicons/react/outline';
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import useFruits from '../../Hooks/useFruits';
 import FruitCard from './FruitCard/FruitCard';
 
-const Fruits = ({slice}) => {
+const Fruits = ({slice,hidden}) => {
   const [fruits] = useFruits();
   
     return (
       <div className="container m-auto text-center mt-10 mb-20 p-10 shadow-2xl">
         <h1 className="text-4xl text-center mb-10">Fruits-Available</h1>
         <div className="flex justify-center">
-          <div className="grid grid-cols-1 
+          <div
+            className="grid grid-cols-1 
           sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3
-          2xl:grid-cols-4 gap-4">
-            {fruits.slice(0,slice).map((fruit) => (
+          2xl:grid-cols-4 gap-4"
+          >
+            {fruits.slice(0, slice).map((fruit) => (
               <FruitCard
                 key={fruit._id}
                 _id={fruit._id}
@@ -25,6 +29,13 @@ const Fruits = ({slice}) => {
                 weight={fruit.weight}
               ></FruitCard>
             ))}
+            <div
+              className={`w-80 rounded border flex justify-center items-center shadow-2xl hover:bg-pink-500 hover:text-white " ${hidden}`}>
+              <Link to={"/addfruits"}>
+                <PlusIcon className="h-52 mt-2p-2"></PlusIcon>
+                <p className="text-2xl pt-3 font-bold">Add A Fruits</p>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
