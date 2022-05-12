@@ -7,9 +7,8 @@ import {
 import { toast } from "react-toastify";
 import auth from "../../../firebase";
 import googlelogo from "../../../googlelogo.png";
-  import "react-toastify/dist/ReactToastify.css";
-import { Link, Navigate, useNavigate } from "react-router-dom";
-import Loading from "../../Shared/Loading/Loading";
+import "react-toastify/dist/ReactToastify.css";
+import { Link,  useNavigate } from "react-router-dom";
 import { LockClosedIcon, LockOpenIcon } from "@heroicons/react/outline";
 import "react-toastify/dist/ReactToastify.minimal.css";
 
@@ -19,7 +18,7 @@ const Register = () => {
   const inputButton =
     "border m-2 p-2 w-96 hover:bg-pink-600 hover:text-pink-100 ease-in-out duration-300 flex items-center justify-center gap-2 focus:animate-pulse";
 
-  // states 
+  // states
   const [showPass, setShowPass] = useState(false);
   const [showConf, setShowConf] = useState(false);
   //react-firebase-hookd
@@ -39,21 +38,21 @@ const Register = () => {
   const confirmPasswordRef = useRef("");
   // conditions
   //conditional formatting
-if (user || googleUser) {
-  navigate("/");
-  window.location.reload(true);
-  console.log(user);
-}else if (error || updateError || googleError) {
-  toast.error(error.toString().slice(37, -2));
-} else {
-  console.clear();
-}
+  if (user || googleUser) {
+    navigate("/");
+    window.location.reload(true);
+    console.log(user);
+  } else if (error || updateError || googleError) {
+    toast.error(error.toString().slice(37, -2));
+  } else {
+    console.clear();
+  }
 
   //eventHandler
   const handleRegister = async (e) => {
     e.preventDefault();
-    const name =e.target.name.value
-    const email =e.target.email.value
+    const name = e.target.name.value;
+    const email = e.target.email.value;
     const password = e.target.password.value;
     const confirmPassword = e.target.confirmPassword.value;
     if (password !== confirmPassword) {
@@ -73,7 +72,7 @@ if (user || googleUser) {
   };
   return (
     <div className=" container mx-auto text-center m-20">
-      <div className=" mx-auto p-6 w-[500px] h-[700px] shadow-2xl flex flex-col gap-3 justify-center items-center ">
+      <div className=" mx-auto p-6 w-[500px] h-[700px] shadow-xl flex flex-col gap-3 justify-center items-center ">
         {loading || updating || googleLoading ? (
           <LockOpenIcon className="bg-pink-100 h-10 p-2 rounded-full"></LockOpenIcon>
         ) : (

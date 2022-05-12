@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ArrowCircleDownIcon, ArrowCircleUpIcon, RefreshIcon } from "@heroicons/react/outline";
+
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../../firebase";
 const ManageFruits = () => {
+  const [user] = useAuthState(auth);
   //styles
-  const span="text-left absolute left-[300px] bottom-6 opacity-50"
-  const inputStyle = "border m-2 p-3 w-96 focus:outline-0 focus:animate-pulse pr-28";
+  const span = "text-left absolute left-[300px] bottom-6 opacity-50";
+  const inputStyle =
+    "border m-2 p-3 w-96 focus:outline-0 focus:animate-pulse pr-28";
   const inputButton =
     "border m-2 p-3 w-96 hover:bg-pink-600 hover:text-pink-100 ease-in-out duration-300 flex items-center justify-center gap-3 focus:animate-pulse";
   //updating
   const updateFruits = (e) => {
     e.preventDefault();
-    const url = `http://localhost:5000/fruits/${id}`;
+    const url = `https://efruits-management.herokuapp.com/fruits/${id}`;
     const updatedname = e.target.name.value;
     const updatedprice = e.target.price.value;
     const updatedphoto = e.target.photo.value;
@@ -26,6 +30,7 @@ const ManageFruits = () => {
       weight: updatedweight,
       supplier: updatedsupplier,
       description: updateddescription,
+      updatedBy: user.email,
     };
     //sending data to the server
     fetch(url, {
@@ -44,7 +49,7 @@ const ManageFruits = () => {
   const { id } = useParams();
   const [fruit, setFruit] = useState({});
   useEffect(() => {
-    const url = `http://localhost:5000/fruits/${id}`;
+    const url = `https://efruits-management.herokuapp.com/fruits/${id}`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => setFruit(data));
@@ -58,7 +63,7 @@ const ManageFruits = () => {
         <p className="text-8xl font-bold">{name}</p>
         <img className="" src={photo} alt="" />
       </div>
-      <div className=" p-6 w-[500px] h-[700px] shadow-2xl flex flex-col gap-2 justify-center items-center ">
+      <div className=" p-6 w-[500px] h-[700px] shadow-xl flex flex-col gap-2 justify-center items-center ">
         <p className="m-2 text-xl text-pink-600">Update Fruit Information</p>
 
         <form
@@ -134,7 +139,8 @@ const ManageFruits = () => {
             <span className={span}>Description</span>
           </div>
           <input className={inputButton} type="submit" value="Update Fruit" />
-          <Link className={inputButton} to={"/inventory"}>Go to Inventory <br />
+          <Link className={inputButton} to={"/inventory"}>
+            Go to Inventory <br />
           </Link>
         </form>
       </div>

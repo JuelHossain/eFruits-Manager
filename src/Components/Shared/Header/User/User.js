@@ -1,26 +1,29 @@
-import React from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import auth from '../../../../firebase';
+import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../../../firebase";
+import Loading from "../../Loading/Loading";
 
 const User = () => {
-    const [user] = useAuthState(auth);
-    console.log(user); 
-    const inputStyle = "border m-2 p-2 w-96 focus:outline-none";
-    const inputButton =
-      "border m-2 p-2 w-96 hover:bg-pink-600 hover:text-pink-100 ease-in-out duration-300 flex items-center justify-center gap-2";
-    const handleUpdate = e => {
-        e.preventDefault();
-      console.log(user)
-    }
+  const [user, loading] = useAuthState(auth);
+  const inputStyle = "border m-2 p-2 w-96 focus:outline-none";
+  const inputButton =
+    "border m-2 p-2 w-96 hover:bg-pink-600 hover:text-pink-100 ease-in-out duration-300 flex items-center justify-center gap-2";
+  const handleUpdate = (e) => {
+    e.preventDefault();
+    console.log(user);
+  };
+  if (loading) {
+    return <Loading></Loading>;
+  } else {
     return (
       <div className="container flex flex-col items-center justify-center m-20 p-10 mx-auto">
         <form
-          className=" w-[500px] p-10 flex flex-col justify-center items-center shadow-2xl"
+          className=" w-[500px] p-10 flex flex-col justify-center items-center shadow-xl"
           onSubmit={handleUpdate}
         >
           <img
             className="w-20 h-20 rounded-full "
-            src={user.photoURL && user.photoURL}
+            src={user.photoURL ? user.photoURL : ""}
             alt="user"
           />
           <p className="m-2 text-xl text-pink-600">User Information</p>
@@ -63,6 +66,7 @@ const User = () => {
         </form>
       </div>
     );
+  }
 };
 
 export default User;

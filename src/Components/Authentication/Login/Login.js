@@ -8,8 +8,12 @@ import { toast } from "react-toastify";
 import auth from "../../../firebase";
 import googlelogo from "../../../googlelogo.png";
 import "react-toastify/dist/ReactToastify.css";
-import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
-import { CheckCircleIcon, LockClosedIcon, LockOpenIcon } from "@heroicons/react/outline";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import {
+  CheckCircleIcon,
+  LockClosedIcon,
+  LockOpenIcon,
+} from "@heroicons/react/outline";
 import "react-toastify/dist/ReactToastify.minimal.css";
 
 const Login = () => {
@@ -19,11 +23,11 @@ const Login = () => {
     "border m-2 p-2 w-96 hover:bg-pink-600 hover:text-pink-100 ease-in-out duration-300 flex items-center justify-center gap-2 focus:animate-pulse";
 
   // states
-    const [showPass, setShowPass] = useState(false);
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+  const [showPass, setShowPass] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   //react-firebase-hookd
-  const [sendPasswordResetEmail, sending, reseterror] =
+  const [sendPasswordResetEmail, sending,] =
     useSendPasswordResetEmail(auth);
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
@@ -31,19 +35,17 @@ const Login = () => {
     useSignInWithGoogle(auth);
 
   //navigate
-    const navigate = useNavigate();
-    const location = useLocation();
-    const destination = location.state?.from?.pathname || "/";
-    
+  const navigate = useNavigate();
+  const location = useLocation();
+  const destination = location.state?.from?.pathname || "/";
 
   //ref
   const emailRef = useRef("");
   const passwordRef = useRef("");
 
-
   //conditional formatting
   if (user || googleUser) {
-    navigate(destination,{replace:true});
+    navigate(destination, { replace: true });
     window.location.reload(true);
   } else if (error || googleError) {
     toast.error(error.toString().slice(37, -2));
@@ -52,7 +54,7 @@ const Login = () => {
   //eventHandler
   return (
     <div className=" container mx-auto text-center m-20">
-      <div className=" mx-auto p-6 w-[500px] h-[700px] shadow-2xl flex flex-col gap-3 justify-center items-center ">
+      <div className=" mx-auto p-6 w-[500px] h-[700px] shadow-xl flex flex-col gap-3 justify-center items-center ">
         {loading || googleLoading ? (
           <LockOpenIcon className="bg-pink-100 h-10 p-2 rounded-full"></LockOpenIcon>
         ) : sending ? (

@@ -1,18 +1,20 @@
-
-import { Route, Routes } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
-import './App.css';
-import Login from './Components/Authentication/Login/Login';
-import Register from './Components/Authentication/Register/Register';
-import RequireAuth from './Components/Authentication/RequireAuth/RequireAuth';
-import Home from './Components/Home/Home';
-import Inventory from './Components/Inventory/Inventory';
-import Products from './Components/Fruits/Fruits';
-import Footer from './Components/Shared/Footer/Footer';
-import Header from './Components/Shared/Header/Header';
-import User from './Components/Shared/Header/User/User';
-import Addfruits from './Components/Fruits/AddFruits/Addfruits';
-import ManageFruits from './Components/Fruits/ManageFruits/ManageFruits';
+import { Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "./App.css";
+import Login from "./Components/Authentication/Login/Login";
+import Register from "./Components/Authentication/Register/Register";
+import RequireAuth from "./Components/Authentication/RequireAuth/RequireAuth";
+import Home from "./Components/Home/Home";
+import Inventory from "./Components/Inventory/Inventory";
+import Products from "./Components/Fruits/Fruits";
+import Footer from "./Components/Shared/Footer/Footer";
+import Header from "./Components/Shared/Header/Header";
+import User from "./Components/Shared/Header/User/User";
+import Addfruits from "./Components/Fruits/AddFruits/Addfruits";
+import ManageFruits from "./Components/Fruits/ManageFruits/ManageFruits";
+import Myitems from "./Components/MyItems/Myitems";
+import AddedByUser from "./Components/MyItems/AddedByUser";
+import UpdatedByUser from "./Components/MyItems/UpdatedByUser";
 
 function App() {
   return (
@@ -30,7 +32,14 @@ function App() {
           }
         ></Route>
         <Route path="/register" element={<Register></Register>}></Route>
-        <Route path="/user" element={<User></User>}></Route>
+        <Route
+          path="/user"
+          element={
+            <RequireAuth>
+              <User></User>
+            </RequireAuth>
+          }
+        ></Route>
         <Route path="/login" element={<Login></Login>}></Route>
         <Route
           path="/inventory"
@@ -48,7 +57,27 @@ function App() {
             </RequireAuth>
           }
         ></Route>
-        <Route path="/update/:id" element={<ManageFruits></ManageFruits>}></Route>
+        <Route
+          path="/myitems/"
+          element={
+            <RequireAuth>
+              <Myitems></Myitems>
+            </RequireAuth>
+          }
+        >
+          <Route
+            path="addedbyme"
+            element={<RequireAuth><AddedByUser></AddedByUser></RequireAuth>}
+          ></Route>
+          <Route
+            path="updatedbyme"
+            element={<RequireAuth><UpdatedByUser></UpdatedByUser></RequireAuth>}
+          ></Route>
+        </Route>
+        <Route
+          path="/update/:id"
+          element={<RequireAuth><ManageFruits></ManageFruits></RequireAuth>}
+        ></Route>
       </Routes>
       <ToastContainer></ToastContainer>
       <Footer></Footer>

@@ -4,30 +4,42 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase";
 import { LogoutIcon, UserIcon } from "@heroicons/react/outline";
 import { signOut } from "firebase/auth";
-import { Link } from "react-router-dom";
-import CustomLink from "../CustomLInk/CustomLink";
+import { Link,NavLink } from "react-router-dom";
+import Loading from "../Loading/Loading";
 
 const Header = () => {
   const logout = () => {
     signOut(auth);
   };
-  const [user] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
+  //style 
+  const navstyle = "p-4 border-l  hover:bg-pink-600 hover:text-white overflow-hidden";
+  const activestyle = "p-4 bg-pink-600 text-white border-l"
+  if (loading) {
+    <Loading></Loading>
+  }
   return (
     <header className="flex justify-center bg-stone-900 sticky top-0 h-14 font-semibold z-40 shadow-md shadow-stone-500">
       <div className="container flex justify-between items-center  bg-stone-900 text-white px-4 py-2">
         <nav className="flex w-1/3">
-          <CustomLink className="hover:bg-pink-500  border-l  p-4" to="/">
-            Home
-          </CustomLink>
-          <CustomLink className="hover:bg-pink-500  border-l  p-4" to="/fruits">
-            Fruits
-          </CustomLink>
-          <CustomLink
-            className="hover:bg-pink-500  border-x  p-4"
-            to="/inventory"
+          <NavLink
+            to="/"
+            className={({ isActive }) => (isActive ? activestyle : navstyle)}
           >
-            Inventory
-          </CustomLink>
+            Home
+          </NavLink>
+        {<NavLink
+          className={({ isActive }) => (isActive ? activestyle : navstyle)}
+          to="/fruits"
+        >
+          Fruits
+        </NavLink>}
+        {<NavLink
+          className={({ isActive }) => (isActive ? `${activestyle} border-r` :`${navstyle} border-r`)}
+          to="/inventory"
+        >
+          Inventory
+        </NavLink>}
         </nav>
         <div className="w-1/3 flex justify-center">
           <Link to={"/"}>
@@ -35,16 +47,22 @@ const Header = () => {
           </Link>
         </div>
         <div className="w-1/3 ">
-          <div className="flex justify-end items-center gap-2">
-            <CustomLink
-              className="hover:bg-pink-500  border-x  p-4"
-              to="/addfruits"
-            >
-              AddFruits
-            </CustomLink>
+          <div className="flex justify-end items-center">
+          {user&&<NavLink
+            className={({ isActive }) => (isActive ? activestyle : navstyle)}
+            to="/myitems/addedbyme"
+          >
+            My Items
+          </NavLink>}
+          {user&&<NavLink
+            className={({ isActive }) => (isActive ? `${activestyle} border-r`: `${navstyle} border-r`)}
+            to="/addfruits"
+          >
+            AddFruits
+          </NavLink>}
             {user ? (
               <div className="flex gap-2 items-center justify-end">
-                <div>
+                <div className="ml-2">
                   <Link
                     to={"/user"}
                     className="text-right text-lg hover:animate-pulse  "
