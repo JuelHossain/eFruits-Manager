@@ -1,26 +1,28 @@
-import { PencilAltIcon, PlusIcon, TrashIcon } from "@heroicons/react/outline";
+import { MinusIcon, PencilAltIcon, PlusIcon, TrashIcon } from "@heroicons/react/outline";
 import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 const InventoryList = ({ _id, name, price, qty, weight, photo, remove }) => {
   // const [showConfirm, setShowConfirm] = useState(false);
   const [newPrice, setNewPrice] = useState(price);
   const [newQty, setNewQty] = useState(qty);
-  const per = weight?.toLowerCase().includes("p" || "e") ? "Pcs" : "Kg";
+  const per = weight?.toLowerCase().includes("p") ? "Pcs" : "Kg";
   //reference of elements
-  const plusRef = useRef();
-  const minusRef = useRef();
-  const plusIconRef = useRef();
-  const minusIconRef = useRef();
-  const priceRef = useRef();
-  const priceButtonRef = useRef();
-  const qtyButtonRef = useRef();
-  const qtyRef = useRef();
-  //updating the items
+  const plusInputRef = useRef();
+  const minusInputRef = useRef();
+  const plusButtonRef = useRef();
+  const minusButtonRef = useRef();
+  const priceInputRef = useRef();
+  const qtyInputRef = useRef();
+
+  //server api
   const url = `https://efruits-management.herokuapp.com/fruits/${_id}`;
+
+  //updated fruit
   const updatedfruit = {
     price: newPrice,
     qty: newQty,
   };
+
   //sending data to the server
   fetch(url, {
     method: "PUT",
@@ -37,6 +39,7 @@ const InventoryList = ({ _id, name, price, qty, weight, photo, remove }) => {
     });
   return (
     <tr className="w-full h-16 p-2 rounded border flex justify-between shadow-md items-center gap-3">
+
       {/* photo */}
       <td className="flex gap-6 items-center w-42">
         <img
@@ -53,22 +56,9 @@ const InventoryList = ({ _id, name, price, qty, weight, photo, remove }) => {
         {/* price title  */}
         <p className="w-10">Price:</p>
 
-        {/* price showing inside a button  */}
-        <button
-          className="w-12 border flex justify-start items-center"
-          ref={priceButtonRef}
-          onDoubleClick={() => {
-            priceRef.current.classList.remove("hidden");
-            priceRef.current.focus();
-            priceButtonRef.current.classList.add("hidden");
-          }}
-        >
-          {newPrice}
-        </button>
-
         {/* price editing input field  */}
         <input
-          className="w-12 hidden appearance-none outline-none border"
+          className="w-12 appearance-none outline-none border cursor-auto"
           onChange={(e) => {
             if (e.target.value < 0) {
               e.target.value = 0;
@@ -81,10 +71,14 @@ const InventoryList = ({ _id, name, price, qty, weight, photo, remove }) => {
               e.target.value = 0;
             }
           }}
+          onDoubleClick={(e) => {
+            e.target.readOnly = false;
+          }}
           type="number"
           name="minus"
-          ref={priceRef}
+          ref={priceInputRef}
           defaultValue={newPrice}
+          readOnly
         />
 
         {/* currency per  */}
@@ -97,20 +91,19 @@ const InventoryList = ({ _id, name, price, qty, weight, photo, remove }) => {
         <p className="w-16">Quantity:</p>
         {/* minus button  */}
         <button
-          ref={minusIconRef}
-          className="w-20 border flex justify-center items-center"
+          ref={minusButtonRef}
+          className="w-10 border flex justify-center items-center"
           onClick={() => {
             setNewQty(parseInt(newQty) - 1);
           }}
           onDoubleClick={() => {
             setNewQty(parseInt(parseInt(newQty) + 2));
-            minusRef.current.classList.remove("hidden");
-            minusRef.current.focus();
-            minusIconRef.current.classList.add("hidden");
+            minusInputRef.current.classList.remove("hidden");
+            minusInputRef.current.focus();
+            minusButtonRef.current.classList.add("hidden");
           }}
         >
-          Delivered
-          {/* <MinusIcon className="h-5"></MinusIcon> */}
+          <MinusIcon className="h-5"></MinusIcon>
         </button>
 
         {/*minus input field  */}
@@ -125,38 +118,27 @@ const InventoryList = ({ _id, name, price, qty, weight, photo, remove }) => {
             if (e.key === "Enter") {
               e.preventDefault();
               setNewQty(parseInt(newQty) - parseInt(e.target.value));
-              minusRef.current.classList.add("hidden");
-              minusIconRef.current.classList.remove("hidden");
+              minusInputRef.current.classList.add("hidden");
+              minusButtonRef.current.classList.remove("hidden");
             }
           }}
           onBlur={(e) => {
+            if (e.target.value === "") {
+              e.target.value = 0;
+            }
             setNewQty(parseInt(newQty) - parseInt(e.target.value));
-            minusRef.current.classList.add("hidden");
-            minusIconRef.current.classList.remove("hidden");
+            minusInputRef.current.classList.add("hidden");
+            minusButtonRef.current.classList.remove("hidden");
           }}
           type="number"
           name="minus"
-          ref={minusRef}
+          ref={minusInputRef}
         />
-        {/* qty showing inside a button  */}
-        <button
-          className="w-16 border flex justify-start items-center"
-          ref={qtyButtonRef}
-          onDoubleClick={() => {
-            qtyButtonRef.current.classList.add("hidden");
-            qtyRef.current.classList.remove("hidden");
-            qtyRef.current.focus();
-          }}
-        >
-          {newQty}
-        </button>
 
         {/* qty editing input field  */}
         <input
-          className="w-16 hidden appearance-none outline-none border"
+          className="w-14  appearance-none outline-none border cursor-auto"
           onBlur={(e) => {
-            qtyButtonRef.current.classList.remove("hidden");
-            qtyRef.current.classList.add("hidden");
             if (e.target.value === "") {
               e.target.value = 0;
             }
@@ -169,24 +151,28 @@ const InventoryList = ({ _id, name, price, qty, weight, photo, remove }) => {
             }
             setNewQty(e.target.value);
           }}
+          onDoubleClick={(e) => {
+            e.target.readOnly = false;
+          }}
           type="number"
           name="minus"
-          ref={qtyRef}
-          defaultValue={newQty}
+          ref={qtyInputRef}
+          value={newQty}
+          readOnly
         />
         {/* plus button  */}
         <button
           className="w-10 border flex justify-center items-center "
           onClick={() => {
-            setNewQty(parseInt(newQty) + 1);
+            setNewQty((q)=>parseInt(q) + 1);
           }}
           onDoubleClick={() => {
-            setNewQty(parseInt(newQty - 2));
-            plusRef.current.classList.remove("hidden");
-            plusRef.current.focus();
-            plusIconRef.current.classList.add("hidden");
+            setNewQty((q)=>parseInt(q - 2));
+            plusInputRef.current.classList.remove("hidden");
+            plusInputRef.current.focus();
+            plusButtonRef.current.classList.add("hidden");
           }}
-          ref={plusIconRef}
+          ref={plusButtonRef}
         >
           <PlusIcon className="h-5"></PlusIcon>
         </button>
@@ -203,19 +189,21 @@ const InventoryList = ({ _id, name, price, qty, weight, photo, remove }) => {
             if (e.key === "Enter") {
               e.preventDefault();
               setNewQty(parseInt(newQty) + parseInt(e.target.value));
-              plusRef.current.classList.add("hidden");
-              plusIconRef.current.classList.remove("hidden");
-              qtyButtonRef.current.refresh();
+              plusInputRef.current.classList.add("hidden");
+              plusButtonRef.current.classList.remove("hidden");
             }
           }}
           onBlur={(e) => {
+            if (e.target.value === "") {
+              e.target.value = 0;
+            }
             setNewQty(parseInt(newQty) + parseInt(e.target.value));
-            plusRef.current.classList.add("hidden");
-            plusIconRef.current.classList.remove("hidden");
+            plusInputRef.current.classList.add("hidden");
+            plusButtonRef.current.classList.remove("hidden");
           }}
           type="number"
           name="plus"
-          ref={plusRef}
+          ref={plusInputRef}
         />
         <p>{per}</p>
       </td>
