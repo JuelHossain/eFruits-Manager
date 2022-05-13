@@ -5,13 +5,13 @@ import useFruits from "../../Hooks/useFruits";
 import Loading from "../Shared/Loading/Loading";
 import InventoryList from "./InventoryList";
 
-const Inventory = ({ slice,hidden }) => {
+const Inventory = ({ slice, hidden }) => {
   const [fruits, setFruits] = useFruits();
   //updating
   const handleRemove = (_id) => {
     const proceed = window.confirm();
     if (proceed) {
-      const url = `https://efruits-management.herokuapp.com/fruits/${_id}`;
+      const url = `http://localhost:5000/fruits/${_id}`;
       fetch(url, {
         method: "DELETE",
       })

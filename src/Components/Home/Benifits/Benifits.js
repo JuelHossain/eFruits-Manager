@@ -6,8 +6,8 @@ const Benifits = () => {
         <h1 className="text-xl font-bold text-center">
           Benifits of Eating Fruits
         </h1>
-        <div className=" grid grid-cols-6 mb-40 gap-4 p-10 pr-0 h-96 overflow-x-auto inline-block">
-          <div className="w-80 p-2 rounded border flex flex-col gap-2 shadow-xl  ">
+        <div className=" grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 mb-40 gap-4 p-10   justify-items-center mx-auto">
+          <div className="flex flex-col gap-2 w-92 h-92 p-4 border hover:bg-amber-500 hover:text-white rounded-xl">
             <p className="text-xl font-bold">
               Fruits and vegetables are a great source of vitamins and minerals.
             </p>
@@ -20,7 +20,7 @@ const Benifits = () => {
               puree.
             </p>
           </div>
-          <div className="w-80 p-2 rounded border flex-col space-between shadow-xl  ">
+          <div className="flex flex-col gap-2 w-92 h-92 p-4 border hover:bg-amber-500 hover:text-white rounded-xl">
             <p className="text-xl font-bold">
               You get to enjoy a variety of flavors and textures.
             </p>
@@ -33,7 +33,7 @@ const Benifits = () => {
               sour.
             </p>
           </div>
-          <div className="w-80 p-2 rounded border flex-col space-between shadow-xl  ">
+          <div className="flex flex-col gap-2 w-92 h-92 p-4 border hover:bg-amber-500 hover:text-white rounded-xl">
             <p className="text-xl font-bold">Lots and lots of fiber. </p>
             <p className="hover:overflow-auto overflow-hidden">
               Most fruits and vegetables have plenty of fiber to fill you up and

@@ -1,8 +1,17 @@
-import { MinusIcon, PencilAltIcon, PlusIcon, TrashIcon } from "@heroicons/react/outline";
+import {
+  MinusIcon,
+  PencilAltIcon,
+  PlusIcon,
+  TrashIcon,
+} from "@heroicons/react/outline";
 import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { Link, useNavigate } from "react-router-dom";
+import auth from "../../firebase";
 const InventoryList = ({ _id, name, price, qty, weight, photo, remove }) => {
+  const [user] = useAuthState(auth);
   // const [showConfirm, setShowConfirm] = useState(false);
+  const navigate = useNavigate();
   const [newPrice, setNewPrice] = useState(price);
   const [newQty, setNewQty] = useState(qty);
   const per = weight?.toLowerCase().includes("p") ? "Pcs" : "Kg";
@@ -14,16 +23,15 @@ const InventoryList = ({ _id, name, price, qty, weight, photo, remove }) => {
   const priceInputRef = useRef();
   const qtyInputRef = useRef();
 
-  //server api
-  const url = `https://efruits-management.herokuapp.com/fruits/${_id}`;
-
-  //updated fruit
+  // updated fruit
   const updatedfruit = {
     price: newPrice,
     qty: newQty,
   };
 
   //sending data to the server
+  //server api
+  const url = `http://localhost:5000/fruits/${_id}`;
   fetch(url, {
     method: "PUT",
     headers: {
@@ -39,7 +47,6 @@ const InventoryList = ({ _id, name, price, qty, weight, photo, remove }) => {
     });
   return (
     <tr className="w-full h-16 p-2 rounded border flex justify-between shadow-md items-center gap-3">
-
       {/* photo */}
       <td className="flex gap-6 items-center w-42">
         <img
@@ -72,7 +79,7 @@ const InventoryList = ({ _id, name, price, qty, weight, photo, remove }) => {
             }
           }}
           onDoubleClick={(e) => {
-            e.target.readOnly = false;
+            user ? (e.target.readOnly = false) : navigate("/login");
           }}
           type="number"
           name="minus"
@@ -94,7 +101,7 @@ const InventoryList = ({ _id, name, price, qty, weight, photo, remove }) => {
           ref={minusButtonRef}
           className="w-10 border flex justify-center items-center"
           onClick={() => {
-            setNewQty(parseInt(newQty) - 1);
+            user ? setNewQty(parseInt(newQty) - 1) : navigate("/login");
           }}
           onDoubleClick={() => {
             setNewQty(parseInt(parseInt(newQty) + 2));
@@ -108,7 +115,7 @@ const InventoryList = ({ _id, name, price, qty, weight, photo, remove }) => {
 
         {/*minus input field  */}
         <input
-          className="w-20 hidden outline-none appearance-none  border"
+          className="w-10 hidden outline-none appearance-none  border"
           onChange={(e) => {
             if (e.target.value < 0) {
               e.target.value = 0;
@@ -152,7 +159,7 @@ const InventoryList = ({ _id, name, price, qty, weight, photo, remove }) => {
             setNewQty(e.target.value);
           }}
           onDoubleClick={(e) => {
-            e.target.readOnly = false;
+            user ? (e.target.readOnly = false) : navigate("/login");
           }}
           type="number"
           name="minus"
@@ -164,10 +171,10 @@ const InventoryList = ({ _id, name, price, qty, weight, photo, remove }) => {
         <button
           className="w-10 border flex justify-center items-center "
           onClick={() => {
-            setNewQty((q)=>parseInt(q) + 1);
+            user ? setNewQty((q) => parseInt(q) + 1) : navigate("/login");
           }}
           onDoubleClick={() => {
-            setNewQty((q)=>parseInt(q - 2));
+            setNewQty((q) => parseInt(q - 2));
             plusInputRef.current.classList.remove("hidden");
             plusInputRef.current.focus();
             plusButtonRef.current.classList.add("hidden");
@@ -221,8 +228,7 @@ const InventoryList = ({ _id, name, price, qty, weight, photo, remove }) => {
           className="w-8 flex justify-end hover:text-red-500"
           onClick={() => {
             // setShowConfirm(true);
-            remove(_id);
-            console.log(_id);
+            user ? remove(_id) : navigate("/login");
           }}
         >
           <TrashIcon className="h-8"></TrashIcon>

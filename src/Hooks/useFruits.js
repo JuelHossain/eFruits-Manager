@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 
 const useFruits = () => {
   const [fruits, setFruits] = useState([]);
+    const url = `http://localhost:5000/fruits`;
   useEffect(() => {
-    fetch("https://efruits-management.herokuapp.com/fruits")
+    fetch(url)
       .then((res) => res.json())
       .then((data) => setFruits(data));
   }, []);

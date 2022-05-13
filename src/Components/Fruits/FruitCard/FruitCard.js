@@ -16,9 +16,9 @@ const FruitCard = ({
 }) => {
   const [user] = useAuthState(auth);
   return (
-    <div className="w-80 p-2 rounded border flex-col space-between shadow-xl  ">
+    <div className="w-92 p-2 rounded border flex-col space-between shadow-xl  ">
       {/* photo and name */}
-      <div className="relative h-72 border rounded">
+      <div className="relative h-80 border rounded">
         <img
           className="rounded w-full h-full object-cover"
           src={photo}
@@ -49,7 +49,7 @@ const FruitCard = ({
         <p className=" rounded h-12 flex items-center justify-center border text-lg">
           Supplier: {supplier}
         </p>
-        <p className="text-left px-1 text-justify h-24 overflow-hidden hover:overflow-auto border my-1 rounded snap-stop">
+        <p className="text-left px-1 text-justify h-28 overflow-hidden hover:overflow-auto border my-1 rounded snap-stop">
           {description}
         </p>
       </div>

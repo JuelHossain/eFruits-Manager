@@ -11,20 +11,20 @@ const AddedByUser = () => {
   const handleRemove = (_id) => {
     const proceed = window.confirm();
     if (proceed) {
-      const url = `https://efruits-management.herokuapp.com/fruits/${_id}`;
+      const url = `http://localhost:5000/fruits/${_id}`;
       fetch(url, {
         method: "DELETE",
       })
         .then((res) => res.json())
         .then((data) => {
           if (data.deletedCount > 0) {
-            console.info('item deleted successfully');
+            console.info("item deleted successfully");
           }
         });
       setFruits(fruits.filter((fruit) => fruit._id !== _id));
     }
   };
-  if (loading||fruits.length===0) {
+  if (loading || fruits.length === 0) {
     return <Loading></Loading>;
   }
   console.log(fruits);

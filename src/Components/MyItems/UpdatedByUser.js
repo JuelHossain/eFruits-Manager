@@ -11,7 +11,7 @@ const UpdatedByUser = () => {
   const handleRemove = (_id) => {
     const proceed = window.confirm();
     if (proceed) {
-      const url = `https://efruits-management.herokuapp.com/fruits/${_id}`;
+      const url = `http://localhost:5000/fruits/${_id}`;
       fetch(url, {
         method: "DELETE",
       })
@@ -24,7 +24,7 @@ const UpdatedByUser = () => {
       setFruits(fruits.filter((fruit) => fruit._id !== _id));
     }
   };
-  if (loading||fruits.length===0) {
+  if (loading || fruits.length === 0) {
     return <Loading></Loading>;
   }
   console.log(fruits);
