@@ -166,9 +166,7 @@ const ManageFruits = () => {
                   }
                 }}
                 onDoubleClick={() => {
-                  if (!qtyInputRef.current.value) {
-                    qtyInputRef.current.value = 0;
-                  } else {
+                  if (qtyInputRef.current.value) {
                     minusInputRef.current.classList.remove("hidden");
                     minusInputRef.current.focus();
                     minusButtonRef.current.classList.add("hidden");
@@ -189,17 +187,16 @@ const ManageFruits = () => {
                 onKeyPress={(e) => {
                   if (e.key === "Enter") {
                     e.preventDefault();
-                    qtyInputRef.current.value =
-                      parseInt(qtyInputRef) - parseInt(e.target.value);
-                    if (!qtyInputRef.current.value) {
-                      qtyInputRef.current.value = 0;
-                    } else {
-                      deliveredRef.current.value =
-                        parseInt(deliveredRef.current.value) +
-                        parseInt(e.target.value);
-                    }
-                    minusInputRef.current.classList.add("hidden");
-                    minusButtonRef.current.classList.remove("hidden");
+                   qtyInputRef.current.value -= e.target.value;
+                   if (!qtyInputRef.current.value) {
+                   } else {
+                     deliveredRef.current.value =
+                       parseInt(deliveredRef.current.value) +
+                       parseInt(e.target.value);
+                   }
+                   minusInputRef.current.classList.add("hidden");
+                   minusButtonRef.current.classList.remove("hidden");
+                  //  e.target.value = 0;
                   }
                 }}
                 onBlur={(e) => {
@@ -212,7 +209,7 @@ const ManageFruits = () => {
                   }
                   minusInputRef.current.classList.add("hidden");
                   minusButtonRef.current.classList.remove("hidden");
-                  e.target.value = 0;
+                  // e.target.value = 0;
                 }}
                 type="number"
                 ref={minusInputRef}
