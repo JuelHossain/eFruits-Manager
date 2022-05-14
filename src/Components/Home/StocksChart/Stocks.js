@@ -1,4 +1,5 @@
 import React from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import {
   Bar,
   BarChart,
@@ -12,6 +13,7 @@ import useFruits from "../../../Hooks/useFruits";
 
 const Stocks = () => {
   const [fruits] = useFruits();
+  const navigate = useNavigate();
   return (
     <div className="container shadow-xl rounded-xl mx-auto m-20">
       <h1 className="text-xl font-bold text-center">
@@ -24,7 +26,9 @@ const Stocks = () => {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="qty" fill="#ff931e" />
+          <Bar onClick={(e) => {
+            navigate(`/update/${e._id}`)
+          }} dataKey="qty" fill="#ff931e" />
         </BarChart>
       </div>
     </div>
