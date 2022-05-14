@@ -116,27 +116,20 @@ const InventoryList = ({ _id, name, price, qty, weight, photo, remove }) => {
         {/*minus input field  */}
         <input
           className="w-10 hidden outline-none appearance-none  border"
-          onChange={(e) => {
-            if (e.target.value < 0) {
-              e.target.value = 0;
-            }
-          }}
           onKeyPress={(e) => {
             if (e.key === "Enter") {
               e.preventDefault();
-              setNewQty(parseInt(newQty) - parseInt(e.target.value));
               minusInputRef.current.classList.add("hidden");
               minusButtonRef.current.classList.remove("hidden");
             }
           }}
           onBlur={(e) => {
-            if (e.target.value === "") {
-              e.target.value = 0;
-            }
             setNewQty(parseInt(newQty) - parseInt(e.target.value));
             minusInputRef.current.classList.add("hidden");
             minusButtonRef.current.classList.remove("hidden");
+            e.target.value = 0;
           }}
+          min={0}
           type="number"
           name="minus"
           ref={minusInputRef}
@@ -145,22 +138,13 @@ const InventoryList = ({ _id, name, price, qty, weight, photo, remove }) => {
         {/* qty editing input field  */}
         <input
           className="w-14  appearance-none outline-none border cursor-auto"
-          onBlur={(e) => {
-            if (e.target.value === "") {
-              e.target.value = 0;
-            }
-          }}
           onChange={(e) => {
-            if (e.target.value < 0) {
-              e.target.value = 0;
-            } else {
               setNewQty(e.target.value);
-            }
-            setNewQty(e.target.value);
           }}
           onDoubleClick={(e) => {
             user ? (e.target.readOnly = false) : navigate("/login");
           }}
+          min={0}
           type="number"
           name="minus"
           ref={qtyInputRef}
@@ -187,27 +171,19 @@ const InventoryList = ({ _id, name, price, qty, weight, photo, remove }) => {
         {/* plus input  */}
         <input
           className="w-10 hidden appearance-none outline-none border"
-          onChange={(e) => {
-            if (e.target.value < 0) {
-              e.target.value = 0;
-            }
-          }}
           onKeyPress={(e) => {
             if (e.key === "Enter") {
               e.preventDefault();
-              setNewQty(parseInt(newQty) + parseInt(e.target.value));
               plusInputRef.current.classList.add("hidden");
               plusButtonRef.current.classList.remove("hidden");
             }
           }}
           onBlur={(e) => {
-            if (e.target.value === "") {
-              e.target.value = 0;
-            }
             setNewQty(parseInt(newQty) + parseInt(e.target.value));
             plusInputRef.current.classList.add("hidden");
             plusButtonRef.current.classList.remove("hidden");
           }}
+          min={0}
           type="number"
           name="plus"
           ref={plusInputRef}
