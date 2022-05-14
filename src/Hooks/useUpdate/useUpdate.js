@@ -1,5 +1,5 @@
-const useUpdate = (update,id) => {
-  const url = `http://localhost:5000/fruits/${id}`;
+const useUpdate = (update, id) => {
+  const url = `https://efruits-management.herokuapp.com/fruits/${id}`;
   //sending data to the server
   fetch(url, {
     method: "PUT",

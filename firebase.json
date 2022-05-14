@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site":"efruitsmanager",
     "public": "build",
     "ignore": [
       "firebase.json",

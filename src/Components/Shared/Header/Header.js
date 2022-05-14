@@ -20,6 +20,7 @@ const Header = () => {
   }
   return (
     <header className="flex justify-center bg-stone-900 sticky top-0 h-14 font-semibold z-40 shadow-md shadow-stone-500">
+      {/* navigation bar and logo */}
       <div className="container flex justify-between items-center  bg-stone-900 text-white px-4 py-2">
         <nav className="flex w-1/3">
           <NavLink
@@ -35,10 +36,16 @@ const Header = () => {
           Fruits
         </NavLink>}
         {<NavLink
-          className={({ isActive }) => (isActive ? `${activestyle} border-r` :`${navstyle} border-r`)}
+          className={({ isActive }) => (isActive ? `${activestyle} ` :`${navstyle}`)}
           to="/inventory"
         >
           Inventory
+        </NavLink>}
+        {<NavLink
+          className={({ isActive }) => (isActive ? `${activestyle} border-r` :`${navstyle} border-r`)}
+          to="/blogs"
+        >
+          Blogs
         </NavLink>}
         </nav>
         <div className="w-1/3 flex justify-center">

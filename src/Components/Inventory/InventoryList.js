@@ -31,7 +31,7 @@ const InventoryList = ({ _id, name, price, qty, weight, photo, remove }) => {
 
   //sending data to the server
   //server api
-  const url = `http://localhost:5000/fruits/${_id}`;
+  const url = `https://efruits-management.herokuapp.com/fruits/${_id}`;
   fetch(url, {
     method: "PUT",
     headers: {

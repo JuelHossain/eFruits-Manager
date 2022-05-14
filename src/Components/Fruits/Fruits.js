@@ -35,11 +35,11 @@ const Fruits = ({ slice, hidden }) => {
               ></FruitCard>
             ))}
             <div
-              className={`w-80 rounded border flex justify-center items-center shadow-xl hover:bg-pink-500 hover:text-white " ${hidden}`}
+              className={`w-full rounded border flex justify-center items-center shadow-xl hover:bg-pink-500 hover:text-white " ${hidden}`}
             >
               <Link to={"/addfruits"}>
-                <PlusIcon className="h-52 mt-2p-2"></PlusIcon>
-                <p className="text-2xl pt-3 font-bold">Add A Fruits</p>
+                <PlusIcon className="h-full w-full p-20"></PlusIcon>
+                {/* <p className="text-2xl pt-3 font-bold">Add A Fruits</p> */}
               </Link>
             </div>
           </div>

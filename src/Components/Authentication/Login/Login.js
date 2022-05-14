@@ -137,7 +137,7 @@ const Login = () => {
             className="border-b pb-2 border-amber-500 hover:text-amber-500"
             to={"/register"}
           >
-            forgotPassword?
+            Forgot Password?
           </button>
         </div>
       </div>

@@ -15,6 +15,8 @@ import ManageFruits from "./Components/Fruits/ManageFruits/ManageFruits";
 import Myitems from "./Components/MyItems/Myitems";
 import AddedByUser from "./Components/MyItems/AddedByUser";
 import UpdatedByUser from "./Components/MyItems/UpdatedByUser";
+import Blogs from "./Components/Blogs/Blogs";
+import NotFound from "./Components/Shared/notFound/NotFound";
 
 function App() {
   return (
@@ -26,9 +28,7 @@ function App() {
         <Route
           path="/fruits"
           element={
-            <RequireAuth>
               <Products></Products>
-            </RequireAuth>
           }
         ></Route>
         <Route path="/register" element={<Register></Register>}></Route>
@@ -49,6 +49,7 @@ function App() {
             </RequireAuth>
           }
         ></Route>
+        <Route path="/blogs" element={<Blogs></Blogs>}></Route>
         <Route
           path="/addfruits"
           element={
@@ -78,6 +79,7 @@ function App() {
           path="/update/:id"
           element={<RequireAuth><ManageFruits></ManageFruits></RequireAuth>}
         ></Route>
+        <Route path="*" element={<NotFound></NotFound>}></Route>
       </Routes>
       <ToastContainer></ToastContainer>
       <Footer></Footer>
