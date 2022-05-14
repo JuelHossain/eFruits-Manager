@@ -6,7 +6,7 @@ const Blogs = () => {
         <h1 className="text-xl font-bold text-center">
           Questions And Answeres
         </h1>
-        <div className=" w-1/2 flex flex-col  gap-4 p-10   justify-items-center mx-auto shadow-md ">
+        <div className="  flex flex-col  gap-4 p-10   justify-items-center mx-auto shadow-md mx-10">
           <div className="flex flex-col gap-2 w-92 h-92 p-4 border hover:bg-amber-500 hover:text-white rounded-xl">
             <p className="text-xl font-bold">
               Difference between `javascript` and `nodejs`

@@ -76,7 +76,7 @@ const ManageFruits = () => {
     return <Loading></Loading>;
   }
   return (
-    <div className=" container mx-auto text-center m-20 flex justify-center w-[1000px] flex flex-col gap-4 ">
+    <div className=" container mx-auto text-center m-16 flex justify-center w-[1000px] flex flex-col gap-4 ">
       {/* card container  */}
       <div className="flex justify-center items-center">
         {/* left side div  */}
@@ -320,7 +320,7 @@ const ManageFruits = () => {
       </div>
 
       {/* footer buttons  */}
-      <div className="w-full h-16 rounded border flex  justify-between shadow-md items-center">
+      <div className="w-full h-16 rounded border flex  justify-between shadow-md items-center ">
         <div className="w-1/2 hover:bg-pink-600 hover:text-white rounded">
           <Link
             to={"/addfruits"}
