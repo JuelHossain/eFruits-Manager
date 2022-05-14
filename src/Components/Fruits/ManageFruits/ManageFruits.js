@@ -184,32 +184,23 @@ const ManageFruits = () => {
               <input
                 className="w-1/3 h-full text-center font-bold text-2xl hidden outline-none appearance-none  border"
                 min={0}
-                onKeyPress={(e) => {
+                onKeyDown={(e) => {
                   if (e.key === "Enter") {
                     e.preventDefault();
-                   qtyInputRef.current.value -= e.target.value;
-                   if (!qtyInputRef.current.value) {
-                   } else {
-                     deliveredRef.current.value =
-                       parseInt(deliveredRef.current.value) +
-                       parseInt(e.target.value);
-                   }
                    minusInputRef.current.classList.add("hidden");
                    minusButtonRef.current.classList.remove("hidden");
-                  //  e.target.value = 0;
                   }
                 }}
                 onBlur={(e) => {
-                  qtyInputRef.current.value -= e.target.value;
-                  if (!qtyInputRef.current.value) {
-                  } else {
+                  qtyInputRef.current.value = parseInt(qtyInputRef.current.value) - parseInt(e.target.value);
+                  if (qtyInputRef.current.value) {
                     deliveredRef.current.value =
                       parseInt(deliveredRef.current.value) +
                       parseInt(e.target.value);
-                  }
+                  } 
                   minusInputRef.current.classList.add("hidden");
                   minusButtonRef.current.classList.remove("hidden");
-                  // e.target.value = 0;
+                  e.target.value = 0;
                 }}
                 type="number"
                 ref={minusInputRef}
@@ -237,9 +228,7 @@ const ManageFruits = () => {
                   }
                 }}
                 onDoubleClick={() => {
-                  if (qtyInputRef.current.value === 0) {
-                    qtyInputRef.current.value = 0;
-                  } else {
+                  if (qtyInputRef.current.value) {
                     qtyInputRef.current.value =
                       parseInt(qtyInputRef.current.value) - 2;
                   }
@@ -259,12 +248,8 @@ const ManageFruits = () => {
                 onKeyPress={(e) => {
                   if (e.key === "Enter") {
                     e.preventDefault();
-                    qtyInputRef.current.value =
-                      parseInt(qtyInputRef.current.value) +
-                      parseInt(e.target.value);
                     plusInputRef.current.classList.add("hidden");
                     plusButtonRef.current.classList.remove("hidden");
-                    e.target.value = 0;
                   }
                 }}
                 onBlur={(e) => {
