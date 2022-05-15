@@ -29,8 +29,9 @@ const InventoryList = ({ _id, name, price, qty, weight, photo, remove }) => {
   const newFruit = {
     price: newPrice,
     qty: newQty,
-    updateBy: user.email,
+    updatedBy: user.email,
   };
+  console.log(newFruit);
   return (
     <tr className="w-full h-16 p-2 rounded border flex justify-between shadow-md items-center gap-3">
       {/* photo */}
