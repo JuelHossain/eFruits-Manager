@@ -1,32 +1,25 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, {  useRef} from "react";
 import { Link, useParams } from "react-router-dom";
 
-import Loading from "../../Shared/Loading/Loading";
-import { ArrowCircleRightIcon, CurrencyBangladeshiIcon, PlusCircleIcon, PlusIcon } from "@heroicons/react/solid";
+import Loading from "../Shared/Loading/Loading";
+import { ArrowCircleRightIcon, CurrencyBangladeshiIcon, PlusCircleIcon } from "@heroicons/react/solid";
 import { useAuthState } from "react-firebase-hooks/auth";
-import auth from "../../../firebase";
-import { toast } from "react-toastify";
+import auth from "../../firebase";
+import useFruit from "../../Hooks/useFruit";
+import update from "../../utilites/update";
 
 const ManageFruits = () => {
   const { id } = useParams();
   const [user] = useAuthState(auth);
   //styles
-  const inputButton =
-    "border m-2 p-3 w-96 hover:bg-pink-600 hover:text-pink-100 ease-in-out duration-300 flex items-center justify-center gap-3 focus:animate-pulse";
   //getting fruit
-  const [fruit, setFruit] = useState({});
-  useEffect(() => {
-    const url = `https://efruits-management.herokuapp.com/fruits/${id}`;
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => setFruit(data));
-  }, []);
+  const [fruit] = useFruit(id);
   let { name, price, qty, photo, supplier, description, weight, delivered } =
     fruit;
   // states
   // getting fruit information
 
-  const update = (e) => {
+  const handleUpdate = (e) => {
     e.preventDefault();
     const newFruit = {
       name: nameInput.current.value,
@@ -39,21 +32,8 @@ const ManageFruits = () => {
       delivered: deliveredRef.current.value,
       updatedBy: user?.email,
     };
-    const url = `https://efruits-management.herokuapp.com/fruits/${id}`;
     //sending data to the server
-    fetch(url, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(newFruit),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.acknowledged) {
-          toast("successfully updated");
-        }
-      });
+    update(newFruit, id,'Fruit has been updated');
   };
 
   //values
@@ -294,7 +274,7 @@ const ManageFruits = () => {
           </div>
           <button
             className="flex justify-center items-center h-20 relative w-full border text-xl font-bold gap-2 hover:bg-pink-600 hover:text-white"
-            onClick={update}
+            onClick={handleUpdate}
           >
             Update
           </button>

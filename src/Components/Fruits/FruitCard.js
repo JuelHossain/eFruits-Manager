@@ -2,7 +2,7 @@ import { CurrencyBangladeshiIcon } from "@heroicons/react/outline";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
-import auth from "../../../firebase";
+import auth from "../../firebase";
 
 const FruitCard = ({
   _id,

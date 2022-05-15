@@ -1,12 +1,12 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 
 const useFruits = () => {
   const [fruits, setFruits] = useState([]);
-  const url = `https://efruits-management.herokuapp.com/fruits`;
+  const url = `/fruits`;
   useEffect(() => {
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => setFruits(data));
+    axios(url)
+      .then(res => setFruits(res.data));
   }, []);
   return [fruits, setFruits];
 };

@@ -1,9 +1,9 @@
 import React from 'react';
 import Fruits from '../Fruits/Fruits';
 import Inventory from '../Inventory/Inventory';
-import Banner from './Banner/Banner';
-import Benifits from './Benifits/Benifits';
-import Stocks from './StocksChart/Stocks';
+import Banner from './Banner';
+import Benifits from './Benifits';
+import Stocks from './Stocks';
 
 const Home = () => {
     return (

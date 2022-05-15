@@ -3,13 +3,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import useFruits from "../../Hooks/useFruits";
 import Loading from "../Shared/Loading/Loading";
-import FruitCard from "./FruitCard/FruitCard";
+import FruitCard from "./FruitCard";
 
 const Fruits = ({ slice, hidden }) => {
   const [fruits] = useFruits();
-  console.log(fruits);
   if (fruits.length === 0) {
-    console.log(fruits);
     return <Loading></Loading>;
   } else {
     return (

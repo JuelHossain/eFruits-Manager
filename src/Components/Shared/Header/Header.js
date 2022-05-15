@@ -24,7 +24,7 @@ const Header = () => {
   return (
     <header className="sticky top-0 z-40 shadow-md shadow-stone-500 bg-stone-900 text-white text-sm lg:text-lg">
       <div className="container mx-auto flex flex-col lg:flex-row  justify-between items-center  font-semibold  ">
-        <div className="container flex  justify-between items-center lg:w-8/12 xl:w-4/6 border-b lg:border-none">
+        <div className="container flex  justify-between items-center lg:w-7/12 xl:w-4/6 border-b lg:border-none">
           <nav className="flex w-2/3 ">
             <NavLink
               to="/"

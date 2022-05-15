@@ -68,6 +68,7 @@ const Register = () => {
       // e.target.confirmPassword.reportValidity();
       await createUserWithEmailAndPassword(email, password);
       await updateProfile({ displayName: name });
+      
     }
   };
   return (

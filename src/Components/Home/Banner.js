@@ -1,5 +1,5 @@
 import React from "react";
-import banner from "../../../banner.jpg";
+import banner from "../../banner.jpg";
 const Banner = () => {
   return (
     <div className="container mx-auto shadow-xl p-2">

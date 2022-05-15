@@ -9,7 +9,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import useFruits from "../../../Hooks/useFruits";
+import useFruits from "../../Hooks/useFruits";
 
 const Stocks = () => {
   const [fruits] = useFruits();

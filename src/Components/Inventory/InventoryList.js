@@ -8,8 +8,10 @@ import React, { useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase";
+import update from "../../utilites/update";
 const InventoryList = ({ _id, name, price, qty, weight, photo, remove }) => {
   const [user] = useAuthState(auth);
+
   // const [showConfirm, setShowConfirm] = useState(false);
   const navigate = useNavigate();
   const [newPrice, setNewPrice] = useState(price);
@@ -24,27 +26,11 @@ const InventoryList = ({ _id, name, price, qty, weight, photo, remove }) => {
   const qtyInputRef = useRef();
 
   // updated fruit
-  const updatedfruit = {
+  const newFruit = {
     price: newPrice,
     qty: newQty,
+    updateBy: user.email,
   };
-
-  //sending data to the server
-  //server api
-  const url = `https://efruits-management.herokuapp.com/fruits/${_id}`;
-  fetch(url, {
-    method: "PUT",
-    headers: {
-      "content-type": "application/json",
-    },
-    body: JSON.stringify(updatedfruit),
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      if (data.acknowledged) {
-        console.log("succes");
-      }
-    });
   return (
     <tr className="w-full h-16 p-2 rounded border flex justify-between shadow-md items-center gap-3">
       {/* photo */}
@@ -67,20 +53,20 @@ const InventoryList = ({ _id, name, price, qty, weight, photo, remove }) => {
         <input
           className="w-12 appearance-none outline-none border cursor-auto"
           onChange={(e) => {
-            if (e.target.value < 0) {
-              e.target.value = 0;
-            } else {
-              setNewPrice(e.target.value);
-            }
+            setNewPrice(e.target.value);
+            update(newFruit, _id);
           }}
           onBlur={(e) => {
             if (e.target.value === "") {
               e.target.value = 0;
             }
+            update(newFruit, _id);
+
           }}
           onDoubleClick={(e) => {
             user ? (e.target.readOnly = false) : navigate("/login");
           }}
+          min={0}
           type="number"
           name="minus"
           ref={priceInputRef}
@@ -102,6 +88,7 @@ const InventoryList = ({ _id, name, price, qty, weight, photo, remove }) => {
           className="w-10 border flex justify-center items-center"
           onClick={() => {
             user ? setNewQty(parseInt(newQty) - 1) : navigate("/login");
+            update(newFruit, _id);
           }}
           onDoubleClick={() => {
             setNewQty(parseInt(parseInt(newQty) + 2));
@@ -124,12 +111,17 @@ const InventoryList = ({ _id, name, price, qty, weight, photo, remove }) => {
             }
           }}
           onBlur={(e) => {
+            if (e.target.value === "") {
+              e.target.value = 0;
+            }
             setNewQty(parseInt(newQty) - parseInt(e.target.value));
+            update(newFruit, _id);
             minusInputRef.current.classList.add("hidden");
             minusButtonRef.current.classList.remove("hidden");
             e.target.value = 0;
           }}
           min={0}
+          defaultValue={0}
           type="number"
           name="minus"
           ref={minusInputRef}
@@ -139,10 +131,20 @@ const InventoryList = ({ _id, name, price, qty, weight, photo, remove }) => {
         <input
           className="w-14  appearance-none outline-none border cursor-auto"
           onChange={(e) => {
-              setNewQty(e.target.value);
+            if (e.target.value === " ") {
+              e.target.value = 0;
+            }
+            setNewQty(e.target.value);
+            update(newFruit, _id);
           }}
           onDoubleClick={(e) => {
             user ? (e.target.readOnly = false) : navigate("/login");
+          }}
+          onBlur={(e) => {
+            if (e.target.value === "") {
+              e.target.value = 0;
+            }
+            update(newFruit, _id);
           }}
           min={0}
           type="number"
@@ -156,6 +158,8 @@ const InventoryList = ({ _id, name, price, qty, weight, photo, remove }) => {
           className="w-10 border flex justify-center items-center "
           onClick={() => {
             user ? setNewQty((q) => parseInt(q) + 1) : navigate("/login");
+            update(newFruit, _id);
+
           }}
           onDoubleClick={() => {
             setNewQty((q) => parseInt(q - 2));
@@ -179,11 +183,17 @@ const InventoryList = ({ _id, name, price, qty, weight, photo, remove }) => {
             }
           }}
           onBlur={(e) => {
+            if (e.target.value === "") {
+              e.target.value = 0;
+            }
             setNewQty(parseInt(newQty) + parseInt(e.target.value));
+            update(newFruit, _id);
             plusInputRef.current.classList.add("hidden");
             plusButtonRef.current.classList.remove("hidden");
+            e.target.value = 0;
           }}
           min={0}
+          defaultValue={0}
           type="number"
           name="plus"
           ref={plusInputRef}

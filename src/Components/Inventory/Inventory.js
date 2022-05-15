@@ -1,27 +1,38 @@
-import { PlusIcon } from "@heroicons/react/outline";
+
 import { ArrowCircleRightIcon, PlusCircleIcon } from "@heroicons/react/solid";
 import React from "react";
 import { Link } from "react-router-dom";
 import useFruits from "../../Hooks/useFruits";
+import Confirm from "../../utilites/Confirm/useConfirm";
+import deleteFruit from "../../utilites/delete";
 import Loading from "../Shared/Loading/Loading";
 import InventoryList from "./InventoryList";
 
 const Inventory = ({ slice, home }) => {
   const [fruits, setFruits] = useFruits();
+  // const [confirm, setConfirm] = useState({
+  //   message: '',
+  //   hidden: false,
+  //   received: false
+  // })
+  // const received = value => {
+  //   console.log(value);
+  //   value ?
+  //     setConfirm({
+  //       hidden: false,
+  //       received: true
+  //     }) : setConfirm({ hidden: false });
+  // }
   //updating
-  const handleRemove = (_id) => {
+  const  handleRemove = (id) => {
+    // setConfirm({
+    //   message: 'Are You sure?',
+    //   hidden: true
+    // });
     const proceed = window.confirm();
     if (proceed) {
-      const url = `https://efruits-management.herokuapp.com/fruits/${_id}`;
-      fetch(url, {
-        method: "DELETE",
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.deletedCount > 0) {
-          }
-        });
-      setFruits(fruits.filter((fruit) => fruit._id !== _id));
+      deleteFruit(id);
+      setFruits(fruits.filter((fruit) => fruit._id !== id));
     }
   };
   if (fruits.length === 0) {
@@ -80,6 +91,7 @@ const Inventory = ({ slice, home }) => {
           </tr>
         </tfoot>
       </table>
+      {/* {confirm.hidden && <Confirm message={confirm.message} send={received}></Confirm> } */}
     </div>
   );
 };

@@ -10,19 +10,21 @@ import Products from "./Components/Fruits/Fruits";
 import Footer from "./Components/Shared/Footer/Footer";
 import Header from "./Components/Shared/Header/Header";
 import User from "./Components/Shared/Header/User/User";
-import Addfruits from "./Components/Fruits/AddFruits/Addfruits";
-import ManageFruits from "./Components/Fruits/ManageFruits/ManageFruits";
+import Addfruits from "./Components/Fruits/Addfruits";
+import ManageFruits from "./Components/Fruits/ManageFruits";
 import Myitems from "./Components/MyItems/Myitems";
 import AddedByUser from "./Components/MyItems/AddedByUser";
 import UpdatedByUser from "./Components/MyItems/UpdatedByUser";
 import Blogs from "./Components/Blogs/Blogs";
 import NotFound from "./Components/Shared/notFound/NotFound";
+import Confirm from "./utilites/Confirm/useConfirm";
 
 function App() {
   return (
     <div className="mx-auto text-stone-500">
       <Header></Header>
       <Routes>
+        <Route path='test' element={<Confirm></Confirm>}></Route>
         <Route path="/" element={<Home></Home>}></Route>
         <Route path="/home" element={<Home></Home>}></Route>
         <Route
