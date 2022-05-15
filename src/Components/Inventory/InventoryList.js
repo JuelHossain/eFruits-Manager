@@ -29,7 +29,7 @@ const InventoryList = ({ _id, name, price, qty, weight, photo, remove }) => {
   const newFruit = {
     price: newPrice,
     qty: newQty,
-    updatedBy: user.email,
+    updatedBy: user?.email,
   };
   console.log(newFruit);
   return (
