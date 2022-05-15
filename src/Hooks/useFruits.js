@@ -1,13 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const useFruits = () => {
+const useFruits = (page,size) => {
   const [fruits, setFruits] = useState([]);
-  const url = `/fruits`;
   useEffect(() => {
+  const url = `/fruits?page=${page}&size=${size}`;
     axios(url)
       .then(res => setFruits(res.data));
-  }, []);
+  }, [page,size]);
   return [fruits, setFruits];
 };
 export default useFruits;
