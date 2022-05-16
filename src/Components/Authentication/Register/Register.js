@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   useCreateUserWithEmailAndPassword,
   useSignInWithGoogle,
@@ -8,9 +8,12 @@ import { toast } from "react-toastify";
 import auth from "../../../firebase";
 import googlelogo from "../../../googlelogo.png";
 import "react-toastify/dist/ReactToastify.css";
-import { Link,  useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { LockClosedIcon, LockOpenIcon } from "@heroicons/react/outline";
 import "react-toastify/dist/ReactToastify.minimal.css";
+import axios from "axios";
+import token from "../../../utilites/token";
+import Loading from "../../Shared/Loading/Loading";
 
 const Register = () => {
   //styles
@@ -36,18 +39,20 @@ const Register = () => {
   const emailRef = useRef("");
   const passwordRef = useRef("");
   const confirmPasswordRef = useRef("");
-  // conditions
-  //conditional formatting
-  if (user || googleUser) {
-    navigate("/");
-    window.location.reload(true);
-    console.log(user);
-  } else if (error || updateError || googleError) {
-    toast.error(error.toString().slice(37, -2));
-  } else {
-    console.clear();
+  //show error
+  const showError = (err) => {
+    toast.error(err?.toString().slice(37, -2));
   }
-
+  useEffect(() => {
+    if (user || googleUser) {
+      user && token(user.user.email);
+      googleUser && token(googleUser.user.email);
+              navigate("/");
+              window.location.reload(true);
+    }else if (error || googleError) {
+      showError(error|| googleError);
+    }
+  }, [user,googleUser,error, googleError,navigate]);
   //eventHandler
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -56,20 +61,12 @@ const Register = () => {
     const password = e.target.password.value;
     const confirmPassword = e.target.confirmPassword.value;
     if (password !== confirmPassword) {
-      toast.error("Password Doesn't Match", {
-        position: "bottom-center",
-      });
-
-      // when i am setting a custom error to the input field the field is showing error even after changing the value matched . i tried 2 days but didn't solved it.  if you can solved it please help.
-      // e.target.confirmPassword.setCustomValidity("Password Doesnot Match");
-      // e.target.confirmPassword.reportValidity();
+      toast.error("Password Doesn't Match");
     } else {
-      // e.target.confirmPassword.setCustomValidity('');
-      // e.target.confirmPassword.reportValidity();
       await createUserWithEmailAndPassword(email, password);
       await updateProfile({ displayName: name });
-      
     }
+    
   };
   return (
     <div className=" container mx-auto text-center m-20">
@@ -150,7 +147,10 @@ const Register = () => {
           <div className="h-px w-40 bg-amber-500"></div>
         </div>
         <div>
-          <button className={inputButton} onClick={() => signInWithGoogle()}>
+          <button
+            className={inputButton}
+            onClick={() =>signInWithGoogle()}
+          >
             <img className="h-6" src={googlelogo} alt="google" />{" "}
             <p>Login With Google</p>
           </button>

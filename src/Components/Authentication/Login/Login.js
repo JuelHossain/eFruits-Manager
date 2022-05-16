@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   useSendPasswordResetEmail,
   useSignInWithEmailAndPassword,
@@ -15,6 +15,8 @@ import {
   LockOpenIcon,
 } from "@heroicons/react/outline";
 import "react-toastify/dist/ReactToastify.minimal.css";
+import axios from "axios";
+import token from "../../../utilites/token";
 
 const Login = () => {
   //styles
@@ -27,8 +29,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   //react-firebase-hook
-  const [sendPasswordResetEmail, sending,] =
-    useSendPasswordResetEmail(auth);
+  const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
   const [signInWithGoogle, googleUser, googleLoading, googleError] =
@@ -43,13 +44,20 @@ const Login = () => {
   const emailRef = useRef("");
   const passwordRef = useRef("");
 
-  //conditional formatting
-  if (user || googleUser) {
-    navigate(destination, { replace: true });
-    window.location.reload(true);
-  } else if (error || googleError) {
-    toast.error(error.toString().slice(37, -2));
-  }
+  const showError = (err) => {
+    toast.error(err?.toString().slice(37, -2));
+  };
+  useEffect(() => {
+    if (user || googleUser) {
+      user && token(user.user.email);
+      googleUser && token(googleUser.user.email);
+      navigate(destination, { replace: true });
+      window.location.reload(true);
+    } else if (error || googleError) {
+      error && showError(error);
+      googleError && showError(googleError);
+    }
+  }, [user, googleUser, error,destination, googleError, navigate]);
 
   //eventHandler
   return (
@@ -114,7 +122,7 @@ const Login = () => {
         </div>
         <div>
           <button className={inputButton} onClick={() => signInWithGoogle()}>
-            <img className="h-6" src={googlelogo} alt="google" />{" "}
+            <img className="h-6" src={googlelogo} alt="google" />
             <p>Login With Google</p>
           </button>
         </div>

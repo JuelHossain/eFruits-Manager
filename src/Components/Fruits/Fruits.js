@@ -8,7 +8,7 @@ import Loading from "../Shared/Loading/Loading";
 import FruitCard from "./FruitCard";
 
 const Fruits = ({ slice, hidden }) => {
-  const [size, setSize] = useState(6);
+  const [size, setSize] = useState(12);
   const [pageCount] = useCount(size);
   const [page, setPage] = useState(0);
   const [fruits] = useFruits(page, slice?slice:size);
@@ -59,7 +59,7 @@ const Fruits = ({ slice, hidden }) => {
             onChange={e => {
               setSize(e.target.value);
             }}
-            defaultValue={6}
+            defaultValue={size}
           >
             <option value="6" >6</option>
             <option value="8">8</option>
