@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, {  useEffect, useRef, useState } from "react";
 import {
   useSendPasswordResetEmail,
   useSignInWithEmailAndPassword,
@@ -15,7 +15,6 @@ import {
   LockOpenIcon,
 } from "@heroicons/react/outline";
 import "react-toastify/dist/ReactToastify.minimal.css";
-import axios from "axios";
 import token from "../../../utilites/token";
 
 const Login = () => {
@@ -36,27 +35,31 @@ const Login = () => {
     useSignInWithGoogle(auth);
 
   //navigate
-  const navigate = useNavigate();
-  const location = useLocation();
+  const navigate = useNavigate('');
+  const location = useLocation('');
   const destination = location.state?.from?.pathname || "/";
 
   //ref
   const emailRef = useRef("");
   const passwordRef = useRef("");
 
-  const showError = (err) => {
+  const showError = async (err) => {
     toast.error(err?.toString().slice(37, -2));
   };
+  
   useEffect(() => {
-    if (user || googleUser) {
-      user && token(user.user.email);
-      googleUser && token(googleUser.user.email);
-      navigate(destination, { replace: true });
-      window.location.reload(true);
-    } else if (error || googleError) {
-      error && showError(error);
-      googleError && showError(googleError);
+    const tok = async () => {
+      if (user || googleUser) {
+        user && await token(user.user.email);
+        googleUser && await token(googleUser.user.email);
+        await navigate(destination, { replace: true });
+       await  window.location.reload(true);
+      } else if (error || googleError) {
+        error && await showError(error);
+        googleError && await showError(googleError);
+      }
     }
+    tok();
   }, [user, googleUser, error,destination, googleError, navigate]);
 
   //eventHandler

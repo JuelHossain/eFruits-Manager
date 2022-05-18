@@ -11,9 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate } from "react-router-dom";
 import { LockClosedIcon, LockOpenIcon } from "@heroicons/react/outline";
 import "react-toastify/dist/ReactToastify.minimal.css";
-import axios from "axios";
 import token from "../../../utilites/token";
-import Loading from "../../Shared/Loading/Loading";
 
 const Register = () => {
   //styles
@@ -29,7 +27,7 @@ const Register = () => {
     useCreateUserWithEmailAndPassword(auth);
   const [signInWithGoogle, googleUser, googleLoading, googleError] =
     useSignInWithGoogle(auth);
-  const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+  const [updateProfile, updating] = useUpdateProfile(auth);
 
   //navigate
   const navigate = useNavigate("");
@@ -40,19 +38,22 @@ const Register = () => {
   const passwordRef = useRef("");
   const confirmPasswordRef = useRef("");
   //show error
-  const showError = (err) => {
+  const showError = async(err) => {
     toast.error(err?.toString().slice(37, -2));
   }
   useEffect(() => {
-    if (user || googleUser) {
-      user && token(user.user.email);
-      googleUser && token(googleUser.user.email);
-              navigate("/");
-              window.location.reload(true);
-    }else if (error || googleError) {
-      error && showError(error);
-      googleError && showError(googleError);
+const tok =async () => {
+      if (user || googleUser) {
+        user && await token(user.user.email);
+        googleUser && await token(googleUser.user.email);
+        await navigate("/");
+        await window.location.reload(true);
+      } else if (error || googleError) {
+        error && await showError(error);
+        googleError && await showError(googleError);
+      }
     }
+    tok();
   }, [user,googleUser,error, googleError,navigate]);
   //eventHandler
   const handleRegister = async (e) => {
@@ -66,6 +67,7 @@ const Register = () => {
     } else {
       await createUserWithEmailAndPassword(email, password);
       await updateProfile({ displayName: name });
+      
     }
     
   };
