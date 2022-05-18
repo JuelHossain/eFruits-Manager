@@ -50,7 +50,8 @@ const Register = () => {
               navigate("/");
               window.location.reload(true);
     }else if (error || googleError) {
-      showError(error|| googleError);
+      error && showError(error);
+      googleError && showError(googleError);
     }
   }, [user,googleUser,error, googleError,navigate]);
   //eventHandler
