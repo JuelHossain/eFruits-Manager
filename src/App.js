@@ -1,30 +1,26 @@
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import "./App.css";
-import Login from "./Components/Authentication/Login/Login";
-import Register from "./Components/Authentication/Register/Register";
-import RequireAuth from "./Components/Authentication/RequireAuth/RequireAuth";
-import Home from "./Components/Home/Home";
-import Inventory from "./Components/Inventory/Inventory";
-import Products from "./Components/Fruits/Fruits";
-import Footer from "./Components/Shared/Footer/Footer";
-import Header from "./Components/Shared/Header/Header";
-import User from "./Components/Shared/Header/User/User";
-import Addfruits from "./Components/Fruits/Addfruits";
-import ManageFruits from "./Components/Fruits/ManageFruits";
-import Myitems from "./Components/MyItems/Myitems";
-import AddedByUser from "./Components/MyItems/AddedByUser";
-import UpdatedByUser from "./Components/MyItems/UpdatedByUser";
-import Blogs from "./Components/Blogs/Blogs";
-import NotFound from "./Components/Shared/notFound/NotFound";
-import Confirm from "./utilites/Confirm/useConfirm";
+import Login from "./Pages/Authentication/Login";
+import Register from "./Pages/Authentication/Register";
+import RequireAuth from "./Pages/Authentication/RequireAuth";
+import Home from "./Pages/Home/Home";
+import Inventory from "./Pages/Inventory/Inventory";
+import Products from "./Pages/Fruits/Fruits";
+import Footer from "./Components/Footer/Footer";
+import Header from "./Components/Header/Header";
+import User from "./Components/Header/User/User";
+import Addfruits from "./Pages/Fruits/Addfruits";
+import ManageFruits from "./Pages/Fruits/ManageFruits";
+import Myitems from "./Pages/MyItems/Myitems";
+import AddedByUser from "./Pages/MyItems/AddedByUser";
+import UpdatedByUser from "./Pages/MyItems/UpdatedByUser";
+import NotFound from "./Pages/notFound/NotFound";
 
 function App() {
   return (
     <div className="mx-auto text-stone-500">
       <Header></Header>
       <Routes>
-        <Route path='test' element={<Confirm></Confirm>}></Route>
         <Route path="/" element={<Home></Home>}></Route>
         <Route path="/home" element={<Home></Home>}></Route>
         <Route
@@ -51,7 +47,6 @@ function App() {
             </RequireAuth>
           }
         ></Route>
-        <Route path="/blogs" element={<Blogs></Blogs>}></Route>
         <Route
           path="/addfruits"
           element={
