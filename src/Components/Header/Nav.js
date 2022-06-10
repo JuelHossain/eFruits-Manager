@@ -10,16 +10,16 @@ const Nav = ({ ...props }) => {
   const activestyle = "p-1 text-orange-400 text-xl";
   return (
     <div>
-      <div className="md:hidden">
+      <div className="md:hidden  relative">
         <button
           onClick={() => {
             setOpen(!open);
           }}
         >
-          <MenuAlt3Icon className="w-10" />
+          <MenuAlt3Icon className='w-8' />
         </button>
         {open && (
-          <div className="absolute top-12 left-0 border bg-stone-900 w-40  flex flex-col">
+          <div className="absolute top-12 left-0 border bg-stone-900 w-28  flex flex-col ease-in-out duration-500">
             <Link
               to={"/home"}
               onClick={() => {
