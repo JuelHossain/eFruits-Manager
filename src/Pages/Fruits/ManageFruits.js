@@ -1,8 +1,12 @@
-import React, {  useRef} from "react";
+import React, { useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import Loading from "../../Components/Loading";
-import { ArrowCircleRightIcon, CurrencyBangladeshiIcon, PlusCircleIcon } from "@heroicons/react/solid";
+import {
+  ArrowCircleRightIcon,
+  CurrencyBangladeshiIcon,
+  PlusCircleIcon,
+} from "@heroicons/react/solid";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase";
 import useFruit from "../../Hooks/useFruit";
@@ -33,7 +37,7 @@ const ManageFruits = () => {
       updatedBy: user?.email,
     };
     //sending data to the server
-    update(newFruit, id,'Fruit has been updated');
+    update(newFruit, id, "Fruit has been updated");
   };
 
   //values
@@ -56,23 +60,23 @@ const ManageFruits = () => {
     return <Loading></Loading>;
   }
   return (
-    <div className=" container mx-auto text-center m-16 flex justify-center w-[1000px] flex flex-col gap-4 ">
+    <div className="container mx-auto text-center sm:my-16 flex justify-center flex-col gap-4 p-3 overflow-hidden">
       {/* card container  */}
-      <div className="flex justify-center items-center">
+      <div className="flex flex-col lg:flex-row justify-center items-center gap-2 w-full mx-auto lg:h-[700px]">
         {/* left side div  */}
-        <div className="flex flex-col border shadow-md justify-between items-center w-[500px] p-4 gap-2">
+        <div className="flex flex-col border shadow-md justify-between items-center p-4 gap-2 h-full w-full">
           {/* name  */}
-          <div className="flex justify-center items-center  relative w-full h-20">
+          <div className="w-full">
             <input
               placeholder="Name"
               ref={nameInput}
               type="text"
-              className="focus:outline-none text-4xl overflow-hidden font-bold text-center border h-20"
+              className="focus:outline-none text-4xl overflow-hidden font-bold text-center border h-20 w-full"
               defaultValue={name}
             />
           </div>
           <div
-            className="relative"
+            className="relative w-full h-full flex items-center"
             onMouseOut={() => {
               photoUrlRef.current.classList.add("hidden");
             }}
@@ -80,16 +84,12 @@ const ManageFruits = () => {
               photoUrlRef.current.classList.remove("hidden");
             }}
           >
-            <img
-              className="w-[450px] h-[450px] object-cover"
-              src={photo}
-              alt=""
-            />
+            <img className="w-full object-cover" src={photo} alt="" />
             <input
               onBlur={(e) => {
                 e.target.classList.add("hidden");
               }}
-              className=" focus:outline-pink-500  hidden absolute h-36 w-[450px] border p-4 text-xl bottom-0 left-0"
+              className=" focus:outline-pink-500  hidden absolute h-36 w-full border p-4 text-xl bottom-0 left-0"
               defaultValue={photo}
               ref={photoUrlRef}
               type="text"
@@ -98,7 +98,7 @@ const ManageFruits = () => {
           {/* price  */}
           <div className="flex gap-2 justify-between items-center w-full  border h-20">
             {/* price title  */}
-            <p className="w-1/3 text-2xl h-full flex justify-center items-center border-r">
+            <p className="flex-1 text-2xl h-full flex justify-center items-center border-r">
               Price
             </p>
 
@@ -111,7 +111,7 @@ const ManageFruits = () => {
                 ref={priceInput}
                 defaultValue={price}
               />
-              <CurrencyBangladeshiIcon className="text-xl absolute bottom-6 right-8 w-6 "></CurrencyBangladeshiIcon>
+              <CurrencyBangladeshiIcon className="text-xl absolute bottom-6 right-2 md:right-6 lg:right-8 xl:right-12 w-6 "></CurrencyBangladeshiIcon>
             </div>
 
             {/* currency per  */}
@@ -126,7 +126,7 @@ const ManageFruits = () => {
 
         {/* right side div  */}
 
-        <div className="flex flex-col border shadow-md justify-between items-center w-[500px] p-4 gap-2">
+        <div className="flex flex-col border shadow-md justify-between items-center p-4 gap-2 h-full w-full">
           {/* quantity  */}
           <div className="flex flex-col items-center gap-2 w-full ">
             {/* quantity title  */}
@@ -138,7 +138,7 @@ const ManageFruits = () => {
               {/* minus button  */}
               <button
                 ref={minusButtonRef}
-                className="w-1/3 h-full border flex justify-center items-center text-2xl font-bold"
+                className="w-1/3 h-full border flex justify-center items-center md:text-xl font-bold"
                 onClick={() => {
                   if (qtyInputRef.current.value) {
                     qtyInputRef.current.value--;
@@ -162,22 +162,24 @@ const ManageFruits = () => {
 
               {/*minus input field  */}
               <input
-                className="w-1/3 h-full text-center font-bold text-2xl hidden outline-none appearance-none  border"
+                className="w-1/3 h-full text-center font-bold sm:text-xl hidden outline-none appearance-none  border"
                 min={0}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
                     e.preventDefault();
-                   minusInputRef.current.classList.add("hidden");
-                   minusButtonRef.current.classList.remove("hidden");
+                    minusInputRef.current.classList.add("hidden");
+                    minusButtonRef.current.classList.remove("hidden");
                   }
                 }}
                 onBlur={(e) => {
-                  qtyInputRef.current.value = parseInt(qtyInputRef.current.value) - parseInt(e.target.value);
+                  qtyInputRef.current.value =
+                    parseInt(qtyInputRef.current.value) -
+                    parseInt(e.target.value);
                   if (qtyInputRef.current.value) {
                     deliveredRef.current.value =
                       parseInt(deliveredRef.current.value) +
                       parseInt(e.target.value);
-                  } 
+                  }
                   minusInputRef.current.classList.add("hidden");
                   minusButtonRef.current.classList.remove("hidden");
                   e.target.value = 0;
@@ -189,18 +191,20 @@ const ManageFruits = () => {
               {/*input field  */}
               <div className="w-1/3 h-full flex justify-center items-center border relative">
                 <input
-                  className="w-full h-full text-2xl font-bold text-center appearance-none outline-none "
+                  className="w-full h-full sm:text-xl font-bold text-center appearance-none outline-none "
                   min={0}
                   type="number"
                   defaultValue={qty}
                   ref={qtyInputRef}
                 />
-                <span className="absolute right-8 font-bold">{per}</span>
+                <span className="absolute right-4 md:right-8 text-xs sm:text-xl  font-bold">
+                  {per}
+                </span>
               </div>
 
               {/* plus button  */}
               <button
-                className="w-1/3 h-full border flex justify-center items-center text-2xl font-bold"
+                className="w-1/3 h-full border flex justify-center items-center sm:text-xl font-bold"
                 onClick={() => {
                   qtyInputRef.current.value++;
                   if (qtyInputRef.current.value < 0) {
@@ -224,7 +228,7 @@ const ManageFruits = () => {
 
               {/* plus input  */}
               <input
-                className="w-1/3 h-full text-center font-bold text-2xl hidden outline-none appearance-none  border"
+                className="w-1/3 h-full text-center font-bold  md:text-2xl hidden outline-none appearance-none  border"
                 onKeyPress={(e) => {
                   if (e.key === "Enter") {
                     e.preventDefault();
@@ -289,7 +293,7 @@ const ManageFruits = () => {
             className="p-4 flex justify-center items-center gap-4"
           >
             <PlusCircleIcon className="h-7"></PlusCircleIcon>
-            <p className="text-xl font-bold">Add A Fruits In Inventory</p>
+            <p className="md:text-xl font-bold">Add A Fruits</p>
           </Link>
         </div>
         <div className="w-1/2 hover:bg-pink-600 hover:text-white border-l rounded">
@@ -297,7 +301,7 @@ const ManageFruits = () => {
             to={"/inventory"}
             className="p-4 flex justify-center items-center gap-4"
           >
-            <p className="text-xl font-bold">Go To Inventory</p>
+            <p className=" font-bold md:text-xl">Inventory</p>
             <ArrowCircleRightIcon className="h-7"></ArrowCircleRightIcon>
           </Link>
         </div>

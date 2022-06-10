@@ -34,26 +34,28 @@ const Myitems = () => {
       <table className="flex justify-center mx-auto">
         <tbody className="flex justify-center flex-col gap-2 w-full">
           <Outlet />
-          <tr className="w-full h-16 rounded border flex  justify-between shadow-md items-center gap-2">
-            <td className="w-1/2 hover:bg-pink-600 hover:text-white rounded">
-              <Link
-                to={"/addfruits"}
-                className="p-4 flex justify-center items-center gap-4"
-              >
-                <PlusCircleIcon className="h-7"></PlusCircleIcon>
-                <p className="text-xl font-bold">Add A Fruits In Inventory</p>
-              </Link>
-            </td>
-            <td className="w-1/2 hover:bg-pink-600 hover:text-white border-l rounded">
-              <Link
-                to={"/inventory"}
-                className="p-4 flex justify-center items-center gap-4"
-              >
-                <p className="text-xl font-bold">Go To Inventory</p>
-                <ArrowCircleRightIcon className="h-7"></ArrowCircleRightIcon>
-              </Link>
-            </td>
-          </tr>
+          <tfoot>
+            <tr className="w-full h-16 rounded border flex  justify-between shadow-md items-center ">
+              <td className="w-1/2 hover:bg-pink-600 hover:text-white rounded">
+                <Link
+                  to={"/addfruits"}
+                  className="p-4 flex justify-center items-center gap-4"
+                >
+                  <PlusCircleIcon className="h-7 hidden sm:block"></PlusCircleIcon>
+                  <p className="md:text-xl font-bold">Add Fruits</p>
+                </Link>
+              </td>
+              <div className="w-1/2 hover:bg-pink-600 hover:text-white border-l rounded">
+                <Link
+                  to={"/inventory"}
+                  className="p-4 flex justify-center items-center gap-4"
+                >
+                  <p className=" font-bold md:text-xl">Inventory</p>
+                  <ArrowCircleRightIcon className="h-7 hidden sm:block"></ArrowCircleRightIcon>
+                </Link>
+              </div>
+            </tr>
+          </tfoot>
         </tbody>
       </table>
     </div>

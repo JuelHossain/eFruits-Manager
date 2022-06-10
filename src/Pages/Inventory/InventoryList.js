@@ -32,7 +32,7 @@ const InventoryList = ({ _id, name, price, qty, weight, photo, remove }) => {
     updatedBy: user?.email,
   };
   return (
-    <tr className="w-full h-16 p-2 rounded border flex justify-between shadow-md items-center gap-3">
+    <tr className=" h-16 p-2 rounded border  shadow-md items-center gap-3 inline-flex justify-between overflow-y-auto">
       {/* photo */}
       <td className="flex gap-6 items-center w-42">
         <img
@@ -45,7 +45,7 @@ const InventoryList = ({ _id, name, price, qty, weight, photo, remove }) => {
       </td>
 
       {/* price  */}
-      <td className="flex gap-2 text-left w-60">
+      <td className="flex gap-2 text-left w-60 items-center">
         {/* price title  */}
         <p className="w-10">Price:</p>
 
@@ -75,7 +75,7 @@ const InventoryList = ({ _id, name, price, qty, weight, photo, remove }) => {
         />
 
         {/* currency per  */}
-        <p>Taka {weight}</p>
+        <p className='w-24'>Taka {weight}</p>
       </td>
 
       {/* quantity  */}

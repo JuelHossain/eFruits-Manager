@@ -12,7 +12,7 @@ const Pagination = ({hidden}) => {
               onClick={() => {
                 setPage(number);
               }}
-              className={page === number ? "bg-pink-500 border-l text-white font-bold text-2xl w-full h-full w-full " : "border-l text-white font-bold text-2xl w-full h-full hover:bg-pink-500"}>{number+1}</button>
+              className={page === number ? "bg-pink-500 border-l text-white font-bold text-2xl w-full h-full  " : "border-l text-white font-bold text-2xl w-full h-full hover:bg-pink-500"}>{number+1}</button>
             
           ))}<select className="w-1/4 h-full bg-stone-500 text-white font-bold text-2xl focus:outline-none text-center "
             onChange={e => {

@@ -12,11 +12,12 @@ const Nav = ({ ...props }) => {
     <div>
       <div className="md:hidden  relative">
         <button
+          className='flex justify-center items-center'
           onClick={() => {
             setOpen(!open);
           }}
         >
-          <MenuAlt3Icon className='w-8' />
+          <MenuAlt3Icon className='w-7' />
         </button>
         {open && (
           <div className="absolute top-12 left-0 border bg-stone-900 w-28  flex flex-col ease-in-out duration-500">

@@ -1,10 +1,11 @@
 import React from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   Bar,
   BarChart,
   CartesianGrid,
   Legend,
+  ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
@@ -16,20 +17,24 @@ const Stocks = () => {
   const navigate = useNavigate();
   return (
     <div className="container shadow-xl rounded-xl mx-auto m-20 hidden md:block">
-      <h1 className="text-xl font-bold text-center">
-        Quantity In Stocks Chart
-      </h1>
+      <h1 className="text-4xl text-center mb-10">Quantity In Stocks Chart</h1>
       <div className="p-10 flex justify-center items-center">
-        <BarChart width={1000} height={400} data={fruits}>
-          <CartesianGrid strokeDasharray="1 1" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Bar onClick={(e) => {
-            navigate(`/update/${e._id}`)
-          }} dataKey="qty" fill="#ff931e" />
-        </BarChart>
+        <ResponsiveContainer width="95%" height={400}>
+          <BarChart data={fruits}>
+            <CartesianGrid strokeDasharray="1 1" />
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Bar
+              onClick={(e) => {
+                navigate(`/update/${e._id}`);
+              }}
+              dataKey="qty"
+              fill="#ff931e"
+            />
+          </BarChart>
+        </ResponsiveContainer>
       </div>
     </div>
   );

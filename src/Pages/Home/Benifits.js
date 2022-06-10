@@ -2,11 +2,11 @@ import React from 'react';
 
 const Benifits = () => {
     return (
-      <div className="container shadow-xl rounded-xl mx-auto">
-        <h1 className="text-xl font-bold text-center">
+      <div className="container shadow-xl rounded-xl mx-auto my-10 py-8">
+        <h1 className="text-4xl text-center mb-10">
           Benifits of Eating Fruits
         </h1>
-        <div className=" grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 mb-40 gap-4 p-10   justify-items-center mx-auto">
+        <div className=" grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 mb-40 gap-4 p-2   justify-items-center mx-auto">
           <div className="flex flex-col gap-2 w-92 h-92 p-4 border hover:bg-amber-500 hover:text-white rounded-xl">
             <p className="text-xl font-bold">
               Fruits and vegetables are a great source of vitamins and minerals.

@@ -18,7 +18,7 @@ import NotFound from "./Pages/notFound/NotFound";
 
 function App() {
   return (
-    <div className="mx-auto text-stone-500">
+    <div className="mx-auto text-stone-500 flex flex-col min-h-screen">
       <Header></Header>
       <Routes>
         <Route path="/" element={<Home></Home>}></Route>
@@ -56,7 +56,7 @@ function App() {
           }
         ></Route>
         <Route
-          path="/myitems/"
+          path="/myitems"
           element={
             <RequireAuth>
               <Myitems></Myitems>
@@ -64,6 +64,7 @@ function App() {
           }
         >
           <Route
+            index
             path="addedbyme"
             element={<RequireAuth><AddedByUser></AddedByUser></RequireAuth>}
           ></Route>

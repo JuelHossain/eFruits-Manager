@@ -6,7 +6,7 @@ import {
 } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
 import auth from "../../firebase";
-import googlelogo from "../../googlelogo.png";
+import googlelogo from "../../assets/googlelogo.png";
 import "react-toastify/dist/ReactToastify.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
@@ -64,8 +64,8 @@ const Login = () => {
 
   //eventHandler
   return (
-    <div className="max-w-lg mx-auto my-2 sm:my-28 p">
-      <div className="shadow flex flex-col items-center p-10 gap-3 ">
+    <div className="container mx-auto my-2 sm:my-28 p">
+      <div className="max-w-lg shadow flex flex-col items-center p-4 sm:p-10 gap-3 mx-auto">
         <div className="flex flex-col items-center">
           {loading || googleLoading ? (
             <LockOpenIcon className="bg-pink-100 h-10 p-2 rounded-full"></LockOpenIcon>

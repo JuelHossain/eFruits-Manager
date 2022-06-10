@@ -31,7 +31,7 @@ const Home = () => {
     }
   }, [user]);
     return (
-      <div className="m-10">
+      <div className="container mx-auto my-10">
         <Banner></Banner>
         <Fruits slice={8} hidden='hidden'></Fruits>
         <Inventory slice={6} home={true} ></Inventory>
