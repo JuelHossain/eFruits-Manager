@@ -15,9 +15,10 @@ import token from "../../utils/token";
 
 const Register = () => {
   //styles
-  const inputStyle = "border m-2 p-2 w-96 focus:outline-0 focus:animate-pulse";
+  const inputStyle =
+    "border w-full focus:outline-0 focus:animate-pulse h-12 p-2";
   const inputButton =
-    "border m-2 p-2 w-96 hover:bg-pink-600 hover:text-pink-100 ease-in-out duration-300 flex items-center justify-center gap-2 focus:animate-pulse";
+    "border w-full hover:bg-pink-600 hover:text-pink-100 ease-in-out duration-300 flex items-center justify-center gap-2 focus:animate-pulse h-12 p-2";
 
   // states
   const [showPass, setShowPass] = useState(false);
@@ -38,23 +39,23 @@ const Register = () => {
   const passwordRef = useRef("");
   const confirmPasswordRef = useRef("");
   //show error
-  const showError = async(err) => {
+  const showError = async (err) => {
     toast.error(err?.toString().slice(37, -2));
-  }
+  };
   useEffect(() => {
-const tok =async () => {
+    const tok = async () => {
       if (user || googleUser) {
-        user && await token(user.user.email);
-        googleUser && await token(googleUser.user.email);
+        user && (await token(user.user.email));
+        googleUser && (await token(googleUser.user.email));
         await navigate("/");
         await window.location.reload(true);
       } else if (error || googleError) {
-        error && await showError(error);
-        googleError && await showError(googleError);
+        error && (await showError(error));
+        googleError && (await showError(googleError));
       }
-    }
+    };
     tok();
-  }, [user,googleUser,error, googleError,navigate]);
+  }, [user, googleUser, error, googleError, navigate]);
   //eventHandler
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -67,20 +68,20 @@ const tok =async () => {
     } else {
       await createUserWithEmailAndPassword(email, password);
       await updateProfile({ displayName: name });
-      
     }
-    
   };
   return (
-    <div className=" container mx-auto text-center m-20">
-      <div className=" mx-auto p-6 w-[500px] h-[700px] shadow-xl flex flex-col gap-3 justify-center items-center ">
-        {loading || updating || googleLoading ? (
-          <LockOpenIcon className="bg-pink-100 h-10 p-2 rounded-full"></LockOpenIcon>
-        ) : (
-          <LockClosedIcon className="bg-pink-100 h-10 p-2 rounded-full"></LockClosedIcon>
-        )}
-        <p className="m-2 text-xl text-pink-600">Please Register</p>
-        <form className="" onSubmit={handleRegister}>
+    <div className="max-w-lg mx-auto my-0.5 sm:my-28 p">
+      <div className="shadow flex flex-col items-center p-10 gap-3 ">
+        <div className="flex flex-col items-center">
+          {loading || updating || googleLoading ? (
+            <LockOpenIcon className="bg-pink-100 h-10 p-2 rounded-full"></LockOpenIcon>
+          ) : (
+            <LockClosedIcon className="bg-pink-100 h-10 p-2 rounded-full"></LockClosedIcon>
+          )}
+          <p className="m-2 text-xl text-pink-600">Please Register</p>
+        </div>
+        <form className="w-full  flex flex-col gap-3" onSubmit={handleRegister}>
           <input
             className={inputStyle}
             ref={nameRef}
@@ -89,8 +90,7 @@ const tok =async () => {
             id="name"
             placeholder="Name"
             required
-          />{" "}
-          <br />
+          />
           <input
             className={inputStyle}
             ref={emailRef}
@@ -99,8 +99,7 @@ const tok =async () => {
             id="email"
             placeholder="Email"
             required
-          />{" "}
-          <br />
+          />
           <div className="relative">
             <input
               className={inputStyle}
@@ -144,17 +143,14 @@ const tok =async () => {
           </div>
           <input className={inputButton} type="submit" value="Register Now" />
         </form>
-        <div className="flex justify-center items-center gap-2">
+        <div className="w-full flex justify-center items-center gap-2 ">
           <div className="h-px w-40 bg-amber-500"></div>
           <p className="text-amber-500">Or</p>
           <div className="h-px w-40 bg-amber-500"></div>
         </div>
-        <div>
-          <button
-            className={inputButton}
-            onClick={() =>signInWithGoogle()}
-          >
-            <img className="h-6" src={googlelogo} alt="google" />{" "}
+        <div className="w-full">
+          <button className={inputButton} onClick={() => signInWithGoogle()}>
+            <img className="h-6" src={googlelogo} alt="google" />
             <p>Login With Google</p>
           </button>
         </div>

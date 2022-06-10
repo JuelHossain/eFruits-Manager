@@ -19,9 +19,9 @@ import token from "../../utils/token"
 
 const Login = () => {
   //styles
-  const inputStyle = "border m-2 p-2 w-96 focus:outline-0 focus:animate-pulse";
+  const inputStyle = "border w-full focus:outline-0 focus:animate-pulse h-12 p-2";
   const inputButton =
-    "border m-2 p-2 w-96 hover:bg-pink-600 hover:text-pink-100 ease-in-out duration-300 flex items-center justify-center gap-2 focus:animate-pulse";
+    "border w-full hover:bg-pink-600 hover:text-pink-100 ease-in-out duration-300 flex items-center justify-center gap-2 focus:animate-pulse h-12 p-2";
 
   // states
   const [showPass, setShowPass] = useState(false);
@@ -64,18 +64,21 @@ const Login = () => {
 
   //eventHandler
   return (
-    <div className=" container mx-auto text-center m-20">
-      <div className=" mx-auto p-6 w-[500px] h-[700px] shadow-xl flex flex-col gap-3 justify-center items-center ">
-        {loading || googleLoading ? (
-          <LockOpenIcon className="bg-pink-100 h-10 p-2 rounded-full"></LockOpenIcon>
-        ) : sending ? (
-          <CheckCircleIcon className="bg-pink-100 h-10 p-2 rounded-full"></CheckCircleIcon>
-        ) : (
-          <LockClosedIcon className="bg-pink-100 h-10 p-2 rounded-full"></LockClosedIcon>
-        )}
-        <p className="m-2 text-xl text-pink-600">Please Login</p>
+    <div className="max-w-lg mx-auto my-2 sm:my-28 p">
+      <div className="shadow flex flex-col items-center p-10 gap-3 ">
+        <div className="flex flex-col items-center">
+          {loading || googleLoading ? (
+            <LockOpenIcon className="bg-pink-100 h-10 p-2 rounded-full"></LockOpenIcon>
+          ) : sending ? (
+            <CheckCircleIcon className="bg-pink-100 h-10 p-2 rounded-full"></CheckCircleIcon>
+          ) : (
+            <LockClosedIcon className="bg-pink-100 h-10 p-2 rounded-full"></LockClosedIcon>
+          )}
+
+          <p className="m-2 text-xl text-pink-600">Please Login</p>
+        </div>
         <form
-          className=""
+          className="w-full  flex flex-col gap-3"
           onSubmit={(e) => {
             e.preventDefault();
             signInWithEmailAndPassword(email, password);
@@ -90,8 +93,7 @@ const Login = () => {
             id="email"
             placeholder="Email"
             required
-          />{" "}
-          <br />
+          />
           <div className="relative">
             <input
               className={inputStyle}
@@ -118,12 +120,12 @@ const Login = () => {
           </div>
           <input className={inputButton} type="submit" value="Login Now" />
         </form>
-        <div className="flex justify-center items-center gap-2">
+        <div className="flex justify-center items-center gap-2 w-full ">
           <div className="h-px w-40 bg-amber-500"></div>
           <p className="text-amber-500">Or</p>
           <div className="h-px w-40 bg-amber-500"></div>
         </div>
-        <div>
+        <div className="w-full">
           <button className={inputButton} onClick={() => signInWithGoogle()}>
             <img className="h-6" src={googlelogo} alt="google" />
             <p>Login With Google</p>
