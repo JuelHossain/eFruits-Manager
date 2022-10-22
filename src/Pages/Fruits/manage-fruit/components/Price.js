@@ -1,9 +1,8 @@
 import React from "react";
 
 import { CurrencyBangladeshiIcon } from "@heroicons/react/solid";
-import { useFruitContext } from "../../../context/fruit-context/FruitContext";
-
-import useFruitActions from "../../../context/fruit-context/useFruitActions";
+import { useFruitContext } from "../../../../context/fruit-context/FruitContext";
+import useFruitActions from "../../../../context/fruit-context/useFruitActions";
 
 const Price = () => {
   const [{ fruit }] = useFruitContext();

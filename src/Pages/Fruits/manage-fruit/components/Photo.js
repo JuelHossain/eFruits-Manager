@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
-import { useFruitContext } from "../../../context/fruit-context/FruitContext";
-import useFruitActions from "../../../context/fruit-context/useFruitActions";
+import { useFruitContext } from "../../../../context/fruit-context/FruitContext";
+import useFruitActions from "../../../../context/fruit-context/useFruitActions";
 
 const Photo = () => {
   const [

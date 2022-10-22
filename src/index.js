@@ -6,7 +6,7 @@ import App from "./App";
 import { FruitProvider } from "./context/fruit-context/FruitContext";
 import "./index.css";
 
-axios.defaults.baseURL = "https://efruits-management.herokuapp.com/";
+axios.defaults.baseURL = "http://localhost:5000/";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>

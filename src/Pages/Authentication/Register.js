@@ -23,7 +23,7 @@ const Register = () => {
   // states
   const [showPass, setShowPass] = useState(false);
   const [showConf, setShowConf] = useState(false);
-  //react-firebase-hookd
+  //react-firebase-hooks
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
   const [signInWithGoogle, googleUser, googleLoading, googleError] =

@@ -1,5 +1,5 @@
 import React from "react";
-import { useFruitContext } from "../../../context/fruit-context/FruitContext";
+import { useFruitContext } from "../../../../context/fruit-context/FruitContext";
 
 const Delivered = () => {
   const [{ fruit }] = useFruitContext();

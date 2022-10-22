@@ -5,14 +5,14 @@ import Loading from "../../../Components/Loading";
 import { useFruitContext } from "../../../context/fruit-context/FruitContext";
 
 import FooterButtons from "../../../Components/shared/FooterButtons";
-import Delivered from "./Delivered";
-import Description from "./Description";
-import Name from "./Name";
-import Photo from "./Photo";
-import Price from "./Price";
-import Quantity from "./Quantity";
-import SuppliedBy from "./SuppliedBy";
-import UpdateButton from "./UpdateButton";
+import Delivered from "./components/Delivered";
+import Description from "./components/Description";
+import Name from "./components/Name";
+import Photo from "./components/Photo";
+import Price from "./components/Price";
+import Quantity from "./components/Quantity";
+import SuppliedBy from "./components/SuppliedBy";
+import UpdateButton from "./components/UpdateButton";
 
 const ManageFruits = () => {
   const { id } = useParams();

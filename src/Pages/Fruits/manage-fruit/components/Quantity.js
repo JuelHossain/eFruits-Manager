@@ -1,6 +1,6 @@
 import React from "react";
-import { useFruitContext } from "../../../context/fruit-context/FruitContext";
-import useFruitActions from "../../../context/fruit-context/useFruitActions";
+import { useFruitContext } from "../../../../context/fruit-context/FruitContext";
+import useFruitActions from "../../../../context/fruit-context/useFruitActions";
 
 import DeliveredButton from "./DeliveredButton";
 import RestockButton from "./RestockButton";

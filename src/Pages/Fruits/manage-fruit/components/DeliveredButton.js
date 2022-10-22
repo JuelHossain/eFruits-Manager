@@ -1,9 +1,9 @@
 import React from "react";
-import { useFruitContext } from "../../../context/fruit-context/FruitContext";
-import useQuantity from "../../../context/fruit-context/useQuantity";
+import { useFruitContext } from "../../../../context/fruit-context/FruitContext";
+import useQuantity from "../../../../context/fruit-context/useQuantity";
 
-const RestockButton = () => {
-  const [{ restockInput, toStock }] = useFruitContext();
+const DeliveredButton = () => {
+  const [{ deliverInput, toDeliver }] = useFruitContext();
 
   const {
     clickHandler,
@@ -11,14 +11,14 @@ const RestockButton = () => {
     doubleClickHandler,
     changeHandler,
     blurHandler,
-  } = useQuantity(true);
+  } = useQuantity();
 
   return (
     <input
-      readOnly={!restockInput}
-      value={restockInput ? toStock : "Restock"}
-      autoFocus={restockInput}
-      type={restockInput ? "number" : "text"}
+      readOnly={!deliverInput}
+      value={deliverInput ? toDeliver : "Delivered"}
+      autoFocus={deliverInput}
+      type={deliverInput ? "number" : "text"}
       min={0}
       className="w-1/3 h-full text-center font-bold sm:text-xl outline-none appearance-none  border cursor-pointer"
       onClick={clickHandler}
@@ -30,4 +30,4 @@ const RestockButton = () => {
   );
 };
 
-export default RestockButton;
+export default DeliveredButton;

@@ -1,8 +1,8 @@
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useFruitContext } from "../../../context/fruit-context/FruitContext";
-import auth from "../../../firebase";
-import update from "../../../utils/update";
+import { useFruitContext } from "../../../../context/fruit-context/FruitContext";
+import auth from "../../../../firebase";
+import update from "../../../../utils/update";
 
 const UpdateButton = () => {
   const [user] = useAuthState(auth);
