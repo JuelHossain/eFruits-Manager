@@ -20,7 +20,7 @@ const FruitCard = ({
       {/* photo and name */}
       <div className="relative h-52 border rounded">
         <img
-          className="rounded w-full h-full object-cover"
+          className="rounded w-full h-full object-cover "
           src={photo}
           alt={name}
         />

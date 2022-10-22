@@ -1,15 +1,14 @@
-
 import { ArrowCircleRightIcon, PlusCircleIcon } from "@heroicons/react/solid";
 import React from "react";
 import { Link } from "react-router-dom";
+import Loading from "../../Components/Loading";
 import useFruits from "../../Hooks/useFruits";
 import deleteFruit from "../../utils/delete";
-import Loading from "../../Components/Loading";
 import InventoryList from "./InventoryList";
 
 const Inventory = ({ slice, home }) => {
   const [fruits, setFruits] = useFruits();
-  const  handleRemove = (id) => {
+  const handleRemove = (id) => {
     const proceed = window.confirm();
     if (proceed) {
       deleteFruit(id);
@@ -50,7 +49,7 @@ const Inventory = ({ slice, home }) => {
                 <p className="md:text-xl font-bold">Add Fruits</p>
               </Link>
             </td>
-            <div className="w-1/2 hover:bg-pink-600 hover:text-white border-l rounded">
+            <td className="w-1/2 hover:bg-pink-600 hover:text-white border-l rounded">
               <Link
                 to={"/myitems/addedbyme"}
                 className="p-4 flex justify-center items-center gap-4"
@@ -58,11 +57,10 @@ const Inventory = ({ slice, home }) => {
                 <p className=" font-bold md:text-xl">My Items</p>
                 <ArrowCircleRightIcon className="h-7 hidden sm:block"></ArrowCircleRightIcon>
               </Link>
-            </div>
+            </td>
           </tr>
         </tfoot>
       </table>
-      {/* {confirm.hidden && <Confirm message={confirm.message} send={received}></Confirm> } */}
     </div>
   );
 };
