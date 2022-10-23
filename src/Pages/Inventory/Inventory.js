@@ -1,10 +1,14 @@
-import { ArrowCircleRightIcon, PlusCircleIcon } from "@heroicons/react/solid";
+import { ArrowCircleRightIcon, PlusCircleIcon } from "@heroicons/react/outline";
 import React from "react";
-import { Link } from "react-router-dom";
 import Loading from "../../Components/Loading";
 import useFruits from "../../Hooks/useFruits";
 import InventoryList from "./inventory-list/InventoryList";
+import TableFooter from "./TableFooter";
 
+const footerLinks = [
+  { name: "Add Fruits", link: "/addfruits", Icon: PlusCircleIcon },
+  { name: "My Items", link: "/myitems/addedbyme", Icon: ArrowCircleRightIcon }
+];
 export default function Inventory({ slice }) {
   const [{ fruits }, fruitsLoading] = useFruits();
 
@@ -24,22 +28,7 @@ export default function Inventory({ slice }) {
         <tbody className="flex justify-center flex-col gap-2 w-full overflow-x-auto ">
           {fruitsLists}
         </tbody>
-        <tfoot>
-          <tr className="w-full h-16 rounded border flex  justify-between shadow-md items-center ">
-            <td className="w-1/2 hover:bg-pink-600 hover:text-white rounded">
-              <Link to="/addfruits" className="p-4 flex justify-center items-center gap-4">
-                <PlusCircleIcon className="h-7 hidden sm:block" />
-                <p className="md:text-xl font-bold">Add Fruits</p>
-              </Link>
-            </td>
-            <td className="w-1/2 hover:bg-pink-600 hover:text-white border-l rounded">
-              <Link to="/myitems/addedbyme" className="p-4 flex justify-center items-center gap-4">
-                <p className=" font-bold md:text-xl">My Items</p>
-                <ArrowCircleRightIcon className="h-7 hidden sm:block" />
-              </Link>
-            </td>
-          </tr>
-        </tfoot>
+        <TableFooter links={footerLinks} />
       </table>
     </div>
   );

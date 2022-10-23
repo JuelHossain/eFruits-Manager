@@ -1,19 +1,19 @@
 import { useReducer } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
+import { useFruitContext } from "../../../context/FruitContext";
 import auth from "../../../firebase";
 
-export default function Price({ v }) {
+export default function Price() {
   const [show, toggle] = useReducer((state) => !state, false);
   const navigate = useNavigate();
   const [user] = useAuthState(auth);
-  const { fruit, updateFToTheServer } = v;
-  const { price, weight } = fruit;
+  const { fruit: { price, weight } = {}, updateFToTheServer } = useFruitContext();
   return (
     <td className="flex gap-2 text-left w-60 items-center">
       <p className="w-10">Price:</p>
       <input
-        className="w-12 appearance-none outline-none border cursor-auto"
+        className="w-12 appearance-none outline-none border cursor-auto text-center"
         onChange={updateFToTheServer}
         onBlur={toggle}
         onDoubleClick={() => {

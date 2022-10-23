@@ -1,7 +1,10 @@
+import { useFruitContext } from "../../../context/FruitContext";
 import useQuantity from "../../../Hooks/useQuantity";
 
 /* eslint-disable jsx-a11y/no-autofocus */
-export default function QMinus({ v }) {
+export default function QMinus() {
+  const v = useFruitContext();
+
   const {
     deliverInput,
     toDeliver,

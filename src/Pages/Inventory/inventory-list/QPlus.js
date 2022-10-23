@@ -1,7 +1,9 @@
+import { useFruitContext } from "../../../context/FruitContext";
 import useQuantity from "../../../Hooks/useQuantity";
 
 /* eslint-disable jsx-a11y/no-autofocus */
-export default function QPlus({ v }) {
+export default function QPlus() {
+  const v = useFruitContext();
   const {
     restockInput,
     toStock,

@@ -3,10 +3,11 @@ import { PencilAltIcon, TrashIcon } from "@heroicons/react/outline";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
+import { useFruitContext } from "../../../context/FruitContext";
 import auth from "../../../firebase";
 
-export default function Actions({ v }) {
-  const { fruit, handleDelete } = v;
+export default function Actions() {
+  const { fruit, handleDelete } = useFruitContext();
 
   const navigate = useNavigate();
   const [user] = useAuthState(auth);

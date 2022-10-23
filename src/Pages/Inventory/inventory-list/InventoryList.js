@@ -12,10 +12,10 @@ function InventoryList({ id }) {
     loading || (
       <FruitProvider value={values}>
         <tr className=" h-16 p-2 rounded border  shadow-md items-center gap-3 inline-flex justify-between overflow-y-auto">
-          <Photo v={values} />
-          <Price v={values} />
-          <Quantity v={values} />
-          <Actions v={values} />
+          <Photo />
+          <Price />
+          <Quantity />
+          <Actions />
         </tr>
       </FruitProvider>
     )
