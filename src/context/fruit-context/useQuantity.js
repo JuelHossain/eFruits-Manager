@@ -3,31 +3,28 @@ import { useFruitContext } from "./FruitContext";
 import useFruitActions from "./useFruitActions";
 
 const useQuantity = (plus) => {
-  const [{ fruit, deliverInput, restockInput, toDeliver, toStock }] =
-    useFruitContext();
+  const [{ fruit, deliverInput, restockInput, toDeliver, toStock }] = useFruitContext();
 
-  const { updateAF, toggleDInput, setToD, toggleSInput, setToS } =
-    useFruitActions();
+  const { updateAF, toggleDInput, setToD, toggleSInput, setToS } = useFruitActions();
 
   const { qty, delivered } = fruit;
 
   const qtyHandler = (value) => {
     if (value) {
-      value = parseInt(value);
+      // eslint-disable-next-line no-param-reassign
+      value = parseInt(value, 10);
       if (plus) {
         updateAF("qty", qty + value);
+      } else if (value <= qty && qty > 0) {
+        updateAF("qty", qty - value);
+        updateAF("delivered", parseInt(delivered, 10) + value);
       } else {
-        if (value <= qty && qty > 0) {
-          updateAF("qty", qty - value);
-          updateAF("delivered", parseInt(delivered) + value);
-        } else {
-          toast("There is not enough stock");
-        }
+        toast("There is not enough stock");
       }
     }
   };
 
-  const blurHandler = (e) => {
+  const blurHandler = () => {
     if (plus && restockInput) {
       qtyHandler(toStock);
       toggleSInput();
@@ -49,10 +46,8 @@ const useQuantity = (plus) => {
       if (!restockInput) {
         qtyHandler(1);
       }
-    } else {
-      if (!deliverInput) {
-        qtyHandler(1);
-      }
+    } else if (!deliverInput) {
+      qtyHandler(1);
     }
   };
 
@@ -63,13 +58,11 @@ const useQuantity = (plus) => {
         toggleSInput();
         setToS(0);
       }
-    } else {
-      if (!deliverInput && qty > 0) {
-        updateAF("qty", qty + 2);
-        updateAF("delivered", delivered - 2);
-        toggleDInput();
-        setToD(0);
-      }
+    } else if (!deliverInput && qty > 0) {
+      updateAF("qty", qty + 2);
+      updateAF("delivered", delivered - 2);
+      toggleDInput();
+      setToD(0);
     }
   };
 
@@ -87,7 +80,7 @@ const useQuantity = (plus) => {
     clickHandler,
     doubleClickHandler,
     enterKeyHandler,
-    changeHandler,
+    changeHandler
   };
 };
 

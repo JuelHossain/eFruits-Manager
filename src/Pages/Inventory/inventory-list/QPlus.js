@@ -1,9 +1,9 @@
-/* eslint-disable jsx-a11y/no-autofocus */
-import React from "react";
-import { useFruitContext } from "../../../../context/fruit-context/FruitContext";
-import useQuantity from "../../../../context/fruit-context/useQuantity";
+import { useFruitContext } from "../../../context/fruit-context/FruitContext";
+import useQuantity from "../../../context/fruit-context/useQuantity";
 
-export default function RestockButton() {
+/* eslint-disable jsx-a11y/no-autofocus */
+export default function QPlus() {
+
   const [{ restockInput, toStock }] = useFruitContext();
 
   const { clickHandler, enterKeyHandler, doubleClickHandler, changeHandler, blurHandler } =

@@ -1,46 +1,30 @@
-
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import Loading from "../../Components/Loading";
 import auth from "../../firebase";
 import useFruits from "../../Hooks/useFruits";
-import deleteFruit from "../../utils/delete";
-import InventoryList from "../Inventory/InventoryList";
-import Loading from "../../Components/Loading";
+import InventoryList from "../Inventory/inventory-list/InventoryList";
 
-const AddedByUser = () => {
+export default function AddedByUser() {
   const [user, loading] = useAuthState(auth);
-  const [fruits, setFruits] = useFruits();
-  const handleRemove = (id) => {
-    const proceed = window.confirm();
-    if (proceed) {
-      deleteFruit(id)
-      setFruits(fruits.filter((fruit) => fruit._id !== id));
-    }
-  };
-  if (loading || fruits.length === 0) {
-    return <tr className="flex justify-center"><td><Loading></Loading></td></tr>
+  const [{ fruits }, fruitsLoading] = useFruits();
+  if (loading || fruitsLoading) {
+    return (
+      <tr className="flex justify-center">
+        <td>
+          <Loading />
+        </td>
+      </tr>
+    );
   }
-  console.log(fruits);
   return (
     <>
       {fruits
         .filter((fruit) => fruit.addedBy === user.email)
-        .map((fruit) => (
-          <InventoryList
-            key={fruit._id}
-            _id={fruit._id}
-            name={fruit.name}
-            price={fruit.price}
-            qty={fruit.qty}
-            photo={fruit.photo}
-            supplier={fruit.supplier}
-            description={fruit.description}
-            weight={fruit.weight}
-            remove={handleRemove}
-          ></InventoryList>
-        ))}
+        .map((fruit) => {
+          const { _id } = fruit;
+          return <InventoryList key={_id} id={_id} />;
+        })}
     </>
   );
-};
-
-export default AddedByUser;
+}

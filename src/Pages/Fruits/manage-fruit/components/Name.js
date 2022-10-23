@@ -2,7 +2,7 @@ import React from "react";
 import { useFruitContext } from "../../../../context/fruit-context/FruitContext";
 import useFruitActions from "../../../../context/fruit-context/useFruitActions";
 
-const Name = () => {
+export default function Name() {
   const { updateF } = useFruitActions();
   const [{ fruit }] = useFruitContext();
 
@@ -18,6 +18,4 @@ const Name = () => {
       />
     </div>
   );
-};
-
-export default Name;
+}

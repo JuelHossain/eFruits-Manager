@@ -4,26 +4,13 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
 import auth from "../../firebase";
 
-const FruitCard = ({
-  _id,
-  name,
-  price,
-  qty,
-  weight,
-  photo,
-  supplier,
-  description,
-}) => {
+export default function FruitCard({ _id, name, price, qty, weight, photo, supplier, description }) {
   const [user] = useAuthState(auth);
   return (
     <div className="p-2 rounded border flex-col space-between shadow-xl  ">
       {/* photo and name */}
       <div className="relative h-52 border rounded">
-        <img
-          className="rounded w-full h-full object-cover "
-          src={photo}
-          alt={name}
-        />
+        <img className="rounded w-full h-full object-cover " src={photo} alt={name} />
         <p className="absolute h-14 bottom-0 w-full bg-stone-900 flex items-center justify-center text-2xl opacity-50 text-white font-semibold">
           {name}
         </p>
@@ -31,7 +18,7 @@ const FruitCard = ({
       {/* weight price quantity */}
       <div className="flex my-1 border justify-between items-center rounded ">
         <p className="w-2/6 text-xl border-r h-12 flex items-center justify-center">
-          {weight ? weight : "1kg"}
+          {weight || "1kg"}
         </p>
         <p className="w-2/6 text-xl border-r h-12 flex items-center justify-center ">
           {price}
@@ -39,9 +26,7 @@ const FruitCard = ({
         </p>
         <p className="w-2/6 text-xl h-12 flex items-center justify-center">
           {qty}
-          <small>
-            {weight?.toLowerCase().includes("p" || "e") ? "pcs" : "kg"}
-          </small>
+          <small>{weight?.toLowerCase().includes("p" || "e") ? "pcs" : "kg"}</small>
         </p>
       </div>
       {/* supplier and description  */}
@@ -56,13 +41,10 @@ const FruitCard = ({
       {user && (
         <Link
           to={`/update/${_id}`}
-          className="bg-pink-500 w-full flex - items-center justify-center h-12 text-white font-semibold text-xl rounded hover:bg-amber-600 "
-        >
+          className="bg-pink-500 w-full flex - items-center justify-center h-12 text-white font-semibold text-xl rounded hover:bg-amber-600 ">
           Manage
         </Link>
       )}
     </div>
   );
-};
-
-export default FruitCard;
+}

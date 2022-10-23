@@ -5,12 +5,13 @@ import {
   setToStock,
   toggleDeliverInput,
   toggleRestockInput,
-  updateAFruit,
+  updateAFruit
 } from "./fruit-action-types";
 import { useFruitContext } from "./FruitContext";
 
 export default function useFruitActions() {
-  const [{}, dispatch] = useFruitContext();
+  // eslint-disable-next-line no-empty-pattern
+  const [{ handleUpdate }, dispatch] = useFruitContext();
 
   const toggleDInput = () => {
     dispatch({ type: toggleDeliverInput });
@@ -43,8 +44,15 @@ export default function useFruitActions() {
   const updateF = (e) => {
     dispatch({
       type: updateAFruit,
-      payload: { [e.target.name]: e.target.value },
+      payload: { [e.target.name]: e.target.value }
     });
+  };
+  const updateFToTheServer = (e) => {
+    dispatch({
+      type: updateAFruit,
+      payload: { [e.target.name]: e.target.value }
+    });
+    handleUpdate();
   };
 
   return {
@@ -56,5 +64,6 @@ export default function useFruitActions() {
     setI,
     updateAF,
     updateF,
+    updateFToTheServer
   };
 }

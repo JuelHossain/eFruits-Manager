@@ -14,7 +14,7 @@ import Quantity from "./components/Quantity";
 import SuppliedBy from "./components/SuppliedBy";
 import UpdateButton from "./components/UpdateButton";
 
-const ManageFruits = () => {
+export default function ManageFruits() {
   const { id } = useParams();
   const [{ loading }] = useFruitContext(id);
 
@@ -44,6 +44,5 @@ const ManageFruits = () => {
       <FooterButtons />
     </div>
   );
-};
+}
 
-export default ManageFruits;

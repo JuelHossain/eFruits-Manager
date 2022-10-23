@@ -8,11 +8,11 @@ import {
   ResponsiveContainer,
   Tooltip,
   XAxis,
-  YAxis,
+  YAxis
 } from "recharts";
 import useFruits from "../../Hooks/useFruits";
 
-const Stocks = () => {
+function Stocks() {
   const [fruits] = useFruits();
   const navigate = useNavigate();
   return (
@@ -38,6 +38,6 @@ const Stocks = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Stocks;

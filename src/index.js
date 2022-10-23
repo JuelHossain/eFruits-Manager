@@ -6,7 +6,7 @@ import App from "./App";
 import { FruitProvider } from "./context/fruit-context/FruitContext";
 import "./index.css";
 
-axios.defaults.baseURL = "http://localhost:5000/";
+axios.defaults.baseURL = "https://efruits-management-juelhossain.koyeb.app/";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>

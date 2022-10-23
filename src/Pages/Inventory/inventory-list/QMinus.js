@@ -1,11 +1,9 @@
+import { useFruitContext } from "../../../context/fruit-context/FruitContext";
+import useQuantity from "../../../context/fruit-context/useQuantity";
+
 /* eslint-disable jsx-a11y/no-autofocus */
-import React from "react";
-import { useFruitContext } from "../../../../context/fruit-context/FruitContext";
-import useQuantity from "../../../../context/fruit-context/useQuantity";
-
-function DeliveredButton() {
+export default function QMinus() {
   const [{ deliverInput, toDeliver }] = useFruitContext();
-
   const { clickHandler, enterKeyHandler, doubleClickHandler, changeHandler, blurHandler } =
     useQuantity();
 
@@ -16,7 +14,7 @@ function DeliveredButton() {
       autoFocus={deliverInput}
       type={deliverInput ? "number" : "text"}
       min={0}
-      className="w-1/3 h-full text-center font-bold sm:text-xl outline-none appearance-none  border cursor-pointer"
+      className="w-10 hidden outline-none appearance-none  border"
       onClick={clickHandler}
       onKeyDown={enterKeyHandler}
       onDoubleClick={doubleClickHandler}
@@ -25,5 +23,3 @@ function DeliveredButton() {
     />
   );
 }
-
-export default DeliveredButton;

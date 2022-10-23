@@ -1,7 +1,7 @@
 import React from "react";
 import { useFruitContext } from "../../../../context/fruit-context/FruitContext";
 
-const Delivered = () => {
+export default function Delivered() {
   const [{ fruit }] = useFruitContext();
   const { delivered } = fruit;
   return (
@@ -17,6 +17,4 @@ const Delivered = () => {
       </p>
     </div>
   );
-};
-
-export default Delivered;
+}

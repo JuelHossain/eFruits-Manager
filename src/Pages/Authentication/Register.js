@@ -1,62 +1,60 @@
+import { LockClosedIcon, LockOpenIcon } from "@heroicons/react/outline";
 import React, { useEffect, useRef, useState } from "react";
 import {
   useCreateUserWithEmailAndPassword,
   useSignInWithGoogle,
-  useUpdateProfile,
+  useUpdateProfile
 } from "react-firebase-hooks/auth";
-import { toast } from "react-toastify";
-import auth from "../../firebase";
-import googlelogo from "../../assets/googlelogo.png";
-import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate } from "react-router-dom";
-import { LockClosedIcon, LockOpenIcon } from "@heroicons/react/outline";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "react-toastify/dist/ReactToastify.minimal.css";
+import googlelogo from "../../assets/googlelogo.png";
+import auth from "../../firebase";
 import token from "../../utils/token";
 
-const Register = () => {
-  //styles
-  const inputStyle =
-    "border w-full focus:outline-0 focus:animate-pulse h-12 p-2";
+export default function Register() {
+  // styles
+  const inputStyle = "border w-full focus:outline-0 focus:animate-pulse h-12 p-2";
   const inputButton =
     "border w-full hover:bg-pink-600 hover:text-pink-100 ease-in-out duration-300 flex items-center justify-center gap-2 focus:animate-pulse h-12 p-2";
 
   // states
   const [showPass, setShowPass] = useState(false);
   const [showConf, setShowConf] = useState(false);
-  //react-firebase-hooks
+  // react-firebase-hooks
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
-  const [signInWithGoogle, googleUser, googleLoading, googleError] =
-    useSignInWithGoogle(auth);
+  const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
   const [updateProfile, updating] = useUpdateProfile(auth);
 
-  //navigate
+  // navigate
   const navigate = useNavigate("");
 
-  //refs
+  // refs
   const nameRef = useRef("");
   const emailRef = useRef("");
   const passwordRef = useRef("");
   const confirmPasswordRef = useRef("");
-  //show error
+  // show error
   const showError = async (err) => {
     toast.error(err?.toString().slice(37, -2));
   };
   useEffect(() => {
-    const tok = async () => {
-      if (user || googleUser) {
-        user && (await token(user.user.email));
-        googleUser && (await token(googleUser.user.email));
-        await navigate("/");
-        await window.location.reload(true);
-      } else if (error || googleError) {
-        error && (await showError(error));
-        googleError && (await showError(googleError));
-      }
+    const setToken = async (usr) => {
+      await token(usr.user.email);
+      await navigate("/");
+      await window.location.reload(true);
     };
-    tok();
+    (async () => {
+      if (user || googleUser) {
+        await setToken(googleUser || user);
+      } else if (error || googleError) {
+        await showError(error || googleError);
+      }
+    })();
   }, [user, googleUser, error, googleError, navigate]);
-  //eventHandler
+  // eventHandler
   const handleRegister = async (e) => {
     e.preventDefault();
     const name = e.target.name.value;
@@ -75,9 +73,9 @@ const Register = () => {
       <div className="shadow flex flex-col items-center p-4 sm:p-10 gap-3 max-w-md mx-auto">
         <div className="flex flex-col items-center">
           {loading || updating || googleLoading ? (
-            <LockOpenIcon className="bg-pink-100 h-10 p-2 rounded-full"></LockOpenIcon>
+            <LockOpenIcon className="bg-pink-100 h-10 p-2 rounded-full" />
           ) : (
-            <LockClosedIcon className="bg-pink-100 h-10 p-2 rounded-full"></LockClosedIcon>
+            <LockClosedIcon className="bg-pink-100 h-10 p-2 rounded-full" />
           )}
           <p className="m-2 text-xl text-pink-600">Please Register</p>
         </div>
@@ -116,8 +114,7 @@ const Register = () => {
               onClick={(e) => {
                 e.preventDefault();
                 setShowPass(!showPass);
-              }}
-            >
+              }}>
               {showPass ? <p>Hide</p> : <p>Show</p>}
             </button>
           </div>
@@ -136,17 +133,16 @@ const Register = () => {
               onClick={(e) => {
                 e.preventDefault();
                 setShowConf(!showConf);
-              }}
-            >
+              }}>
               {showConf ? <p>Hide</p> : <p>Show</p>}
             </button>
           </div>
           <input className={inputButton} type="submit" value="Register Now" />
         </form>
         <div className="w-full flex justify-center items-center gap-2 ">
-          <div className="h-px w-40 bg-amber-500"></div>
+          <div className="h-px w-40 bg-amber-500" />
           <p className="text-amber-500">Or</p>
-          <div className="h-px w-40 bg-amber-500"></div>
+          <div className="h-px w-40 bg-amber-500" />
         </div>
         <div className="w-full">
           <button className={inputButton} onClick={() => signInWithGoogle()}>
@@ -154,15 +150,10 @@ const Register = () => {
             <p>Login With Google</p>
           </button>
         </div>
-        <Link
-          className="border-b pb-2 border-amber-500 hover:text-amber-500"
-          to={"/login"}
-        >
+        <Link className="border-b pb-2 border-amber-500 hover:text-amber-500" to="/login">
           Already Registered?
         </Link>
       </div>
     </div>
   );
-};
-
-export default Register;
+}

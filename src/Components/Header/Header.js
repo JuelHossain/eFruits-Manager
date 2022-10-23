@@ -1,10 +1,9 @@
-
 import React from "react";
 import Logo from "./Logo";
 import Nav from "./Nav";
 import UserNav from "./UserNav";
 
-const Header = () => {
+export default function Header() {
   return (
     <header className="sticky top-0 z-40 shadow-md shadow-stone-500 bg-stone-900 text-white ">
       <div className="container mx-auto">
@@ -16,6 +15,4 @@ const Header = () => {
       </div>
     </header>
   );
-};
-
-export default Header;
+}

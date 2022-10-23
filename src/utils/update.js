@@ -1,12 +1,12 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const update = (newFruit, id,message) => {
+const update = (newFruit, id, message) => {
   const url = `/fruits/${id}`;
-  //sending data to the server
+  // sending data to the server
   axios.put(url, newFruit).then((res) => {
-      if (res.data.acknowledged) {
-      message&&toast.success(message);
+    if (res.data.acknowledged && message) {
+      toast.success(message);
     }
   });
 };

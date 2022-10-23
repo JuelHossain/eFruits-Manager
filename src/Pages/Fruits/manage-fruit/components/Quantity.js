@@ -5,7 +5,7 @@ import useFruitActions from "../../../../context/fruit-context/useFruitActions";
 import DeliveredButton from "./DeliveredButton";
 import RestockButton from "./RestockButton";
 
-const Quantity = () => {
+function Quantity() {
   const [{ fruit }] = useFruitContext();
   const { updateF } = useFruitActions();
 
@@ -28,15 +28,13 @@ const Quantity = () => {
             name="qty"
             onChange={updateF}
           />
-          <span className="absolute right-4 md:right-8 text-xs sm:text-xl  font-bold">
-            {per}
-          </span>
+          <span className="absolute right-4 md:right-8 text-xs sm:text-xl  font-bold">{per}</span>
         </div>
 
         <RestockButton />
       </div>
     </>
   );
-};
+}
 
 export default Quantity;

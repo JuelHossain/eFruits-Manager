@@ -2,7 +2,7 @@ import React from "react";
 import { useFruitContext } from "../../../../context/fruit-context/FruitContext";
 import useFruitActions from "../../../../context/fruit-context/useFruitActions";
 
-const SuppliedBy = () => {
+export default function SuppliedBy() {
   const [{ fruit }] = useFruitContext();
   const { updateF } = useFruitActions();
   const { supplier } = fruit;
@@ -18,6 +18,4 @@ const SuppliedBy = () => {
       />
     </div>
   );
-};
-
-export default SuppliedBy;
+}
