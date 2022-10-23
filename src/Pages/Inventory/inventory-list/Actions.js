@@ -7,8 +7,7 @@ import { useFruitContext } from "../../../context/FruitContext";
 import auth from "../../../firebase";
 
 export default function Actions() {
-  const { fruit, handleDelete } = useFruitContext();
-
+  const { fruit, deleteFruit, refetch } = useFruitContext();
   const navigate = useNavigate();
   const [user] = useAuthState(auth);
   return (
@@ -19,7 +18,7 @@ export default function Actions() {
       <button
         type="button"
         className="w-8 flex justify-end hover:text-red-500"
-        onClick={() => (user ? handleDelete() : navigate("/login"))}>
+        onClick={() => (user ? deleteFruit(refetch) : navigate("/login"))}>
         <TrashIcon className="h-8" />
       </button>
     </td>

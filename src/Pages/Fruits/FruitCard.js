@@ -34,7 +34,7 @@ export default function FruitCard({ _id, name, price, qty, weight, photo, suppli
         <p className=" rounded h-12 flex items-center justify-center border text-lg">
           Supplier: {supplier}
         </p>
-        <p className="text-left px-1 text-justify h-28 overflow-hidden hover:overflow-auto border my-1 rounded snap-stop">
+        <p className=" px-1 text-justify h-28 overflow-hidden hover:overflow-auto border my-1 rounded snap-stop">
           {description}
         </p>
       </div>

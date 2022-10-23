@@ -3,13 +3,12 @@ import React from "react";
 import { useFruitContext } from "../../../../context/FruitContext";
 
 function UpdateButton() {
-  const { updateFruit } = useFruitContext();
+  const { initial } = useFruitContext();
   return (
     <button
-      type="button"
-      className="flex justify-center items-center h-20 relative w-full border text-xl font-bold gap-2 hover:bg-pink-600 hover:text-white"
-      onClick={updateFruit}>
-      Update
+      type="submit"
+      className="flex justify-center items-center h-20 relative w-full border text-xl font-bold gap-2 hover:bg-pink-600 hover:text-white">
+      {initial ? "Add A Fruit" : "Update"}
     </button>
   );
 }

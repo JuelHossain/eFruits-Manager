@@ -5,7 +5,7 @@ import DeliveredButton from "./DeliveredButton";
 import RestockButton from "./RestockButton";
 
 function Quantity() {
-  const { fruit: { qty, weight } = {}, updateF } = useFruitContext();
+  const { fruit: { qty, weight } = {}, updateF, initial } = useFruitContext();
 
   const per = weight?.toLowerCase().includes("p") ? "Pcs" : "Kg";
   return (
@@ -14,10 +14,12 @@ function Quantity() {
         <p>Quantity</p>
       </div>
       <div className="flex w-full h-20 justify-center items-center">
-        <DeliveredButton />
+        {initial || <DeliveredButton />}
 
-        <div className="w-1/3 h-full flex justify-center items-center border relative">
+        <div className="flex-1 h-full flex justify-center items-center border relative">
           <input
+            required
+            placeholder="Quantity here"
             className="w-full h-full sm:text-xl font-bold text-center appearance-none outline-none "
             min={0}
             type="number"
@@ -28,7 +30,7 @@ function Quantity() {
           <span className="absolute right-4 md:right-8 text-xs sm:text-xl  font-bold">{per}</span>
         </div>
 
-        <RestockButton />
+        {initial || <RestockButton />}
       </div>
     </>
   );

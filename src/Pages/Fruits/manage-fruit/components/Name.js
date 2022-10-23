@@ -7,7 +7,8 @@ export default function Name() {
   return (
     <div className="w-full">
       <input
-        placeholder="Name"
+        required
+        placeholder="Name Here"
         type="text"
         name="name"
         onChange={updateF}

@@ -8,7 +8,7 @@ import InventoryList from "../Inventory/inventory-list/InventoryList";
 function UpdatedByUser() {
   const [user, loading] = useAuthState(auth);
 
-  const [{ fruits }, fruitsLoading] = useFruits();
+  const { fruits, loading: fruitsLoading, refetch } = useFruits();
 
   if (loading || fruitsLoading) {
     return (
@@ -25,7 +25,7 @@ function UpdatedByUser() {
         .filter((fruit) => fruit.updatedBy === user.email)
         .map((fruit) => {
           const { _id } = fruit;
-          return <InventoryList key={_id} id={_id} />;
+          return <InventoryList key={_id} id={_id} refetch={refetch} />;
         })}
     </>
   );

@@ -11,9 +11,9 @@ function Fruits({ slice, hidden }) {
   const [size, setSize] = useState(12);
   const [pageCount] = useCount(size);
   const [page, setPage] = useState(0);
-  const [{fruits}] = useFruits(page, slice || size);
+  const { fruits, loading } = useFruits(page, slice || size);
 
-  if (fruits.length === 0) {
+  if (loading) {
     return <Loading />;
   }
   return (

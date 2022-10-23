@@ -13,7 +13,7 @@ import {
 import useFruits from "../../Hooks/useFruits";
 
 function Stocks() {
-  const [fruits] = useFruits();
+  const { fruits } = useFruits();
   const navigate = useNavigate();
   return (
     <div className="container shadow-xl rounded-xl mx-auto m-20 hidden md:block">

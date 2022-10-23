@@ -7,7 +7,8 @@ import InventoryList from "../Inventory/inventory-list/InventoryList";
 
 export default function AddedByUser() {
   const [user, loading] = useAuthState(auth);
-  const [{ fruits }, fruitsLoading] = useFruits();
+  const { fruits, loading: fruitsLoading, refetch } = useFruits();
+
   if (loading || fruitsLoading) {
     return (
       <tr className="flex justify-center">
@@ -23,7 +24,7 @@ export default function AddedByUser() {
         .filter((fruit) => fruit.addedBy === user.email)
         .map((fruit) => {
           const { _id } = fruit;
-          return <InventoryList key={_id} id={_id} />;
+          return <InventoryList key={_id} id={_id} refetch={refetch} />;
         })}
     </>
   );

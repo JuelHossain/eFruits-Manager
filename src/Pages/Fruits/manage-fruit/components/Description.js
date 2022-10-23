@@ -6,8 +6,11 @@ export default function Description() {
 
   return (
     <textarea
+      required
+      placeholder="description here"
       value={description}
       onChange={updateF}
+      name="description"
       className=" resize-none h-[11.6rem] w-full p-2 text-lg focus:outline-none border"
     />
   );

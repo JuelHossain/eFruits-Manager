@@ -10,14 +10,13 @@ const footerLinks = [
   { name: "My Items", link: "/myitems/addedbyme", Icon: ArrowCircleRightIcon }
 ];
 export default function Inventory({ slice }) {
-  const [{ fruits }, fruitsLoading] = useFruits();
-
+  const { fruits, loading, refetch } = useFruits();
   const fruitsLists = fruits.slice(0, slice).map((fruit) => {
     const { _id } = fruit;
-    return <InventoryList key={_id} id={_id} />;
+    return <InventoryList key={_id} id={_id} refetch={refetch} />;
   });
 
-  if (fruitsLoading) {
+  if (loading) {
     return <Loading />;
   }
 

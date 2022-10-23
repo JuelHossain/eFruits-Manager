@@ -12,6 +12,8 @@ export default function Price() {
 
       <div className="w-1/3 text-2xl h-full flex justify-center items-center relative">
         <input
+          required
+          placeholder="Price here"
           className="w-full text-2xl appearance-none outline-none  h-full cursor-auto text-center"
           min={0}
           type="number"
@@ -23,6 +25,8 @@ export default function Price() {
       </div>
 
       <input
+        required
+        placeholder="Weight here"
         className="w-1/3 text-2xl appearance-none outline-none  h-full cursor-auto text-center border-l"
         type="text"
         value={weight}
