@@ -1,13 +1,11 @@
 import React from "react";
 
 import { CurrencyBangladeshiIcon } from "@heroicons/react/solid";
-import { useFruitContext } from "../../../../context/fruit-context/FruitContext";
-import useFruitActions from "../../../../context/fruit-context/useFruitActions";
+import { useFruitContext } from "../../../../context/FruitContext";
 
 export default function Price() {
-  const [{ fruit }] = useFruitContext();
-  const { price, weight } = fruit;
-  const { updateF } = useFruitActions();
+  const { fruit: { price, weight } = {}, updateF } = useFruitContext();
+
   return (
     <div className="flex gap-2 justify-between items-center w-full  border h-20">
       <p className="flex-1 text-2xl h-full flex justify-center items-center border-r">Price</p>

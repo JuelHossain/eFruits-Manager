@@ -1,11 +1,9 @@
 import React from "react";
-import { useFruitContext } from "../../../../context/fruit-context/FruitContext";
-import useFruitActions from "../../../../context/fruit-context/useFruitActions";
+import { useFruitContext } from "../../../../context/FruitContext";
 
 export default function Description() {
-  const [{ fruit }] = useFruitContext();
-  const { updateF } = useFruitActions();
-  const { description } = fruit;
+  const { fruit: { description } = {}, updateF } = useFruitContext();
+
   return (
     <textarea
       value={description}

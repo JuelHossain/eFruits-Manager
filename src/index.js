@@ -3,17 +3,14 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
-import { FruitProvider } from "./context/fruit-context/FruitContext";
 import "./index.css";
 
-axios.defaults.baseURL = "https://efruits-management-juelhossain.koyeb.app/";
+axios.defaults.baseURL = "http://localhost:5000/";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <React.StrictMode>
-      <FruitProvider>
-        <App />
-      </FruitProvider>
+      <App />
     </React.StrictMode>
   </BrowserRouter>
 );

@@ -1,22 +1,25 @@
-import { useFruitContext } from "../../../context/fruit-context/FruitContext";
-import useQuantity from "../../../context/fruit-context/useQuantity";
+import useQuantity from "../../../Hooks/useQuantity";
 
 /* eslint-disable jsx-a11y/no-autofocus */
-export default function QPlus() {
-
-  const [{ restockInput, toStock }] = useFruitContext();
-
-  const { clickHandler, enterKeyHandler, doubleClickHandler, changeHandler, blurHandler } =
-    useQuantity(true);
+export default function QPlus({ v }) {
+  const {
+    restockInput,
+    toStock,
+    clickHandler,
+    enterKeyHandler,
+    doubleClickHandler,
+    changeHandler,
+    blurHandler
+  } = useQuantity(v, { plus: true, send: true });
 
   return (
     <input
       readOnly={!restockInput}
-      value={restockInput ? toStock : "Restock"}
+      value={restockInput ? toStock : "+"}
       autoFocus={restockInput}
       type={restockInput ? "number" : "text"}
       min={0}
-      className="w-1/3 h-full text-center font-bold sm:text-xl outline-none appearance-none  border cursor-pointer"
+      className="w-10 outline-none appearance-none  border text-center cursor-pointer"
       onClick={clickHandler}
       onKeyDown={enterKeyHandler}
       onDoubleClick={doubleClickHandler}

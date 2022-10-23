@@ -1,23 +1,29 @@
+import { useReducer, useState } from "react";
 import { toast } from "react-toastify";
-import { useFruitContext } from "./FruitContext";
-import useFruitActions from "./useFruitActions";
 
-const useQuantity = (plus) => {
-  const [{ fruit, deliverInput, restockInput, toDeliver, toStock }] = useFruitContext();
+const useQuantity = (v, options) => {
+  const { plus, send } = options ?? {};
+  const [deliverInput, toggleDInput] = useReducer((st) => !st, false);
+  const [restockInput, toggleSInput] = useReducer((st) => !st, false);
+  const [toDeliver, setToD] = useState(0);
+  const [toStock, setToS] = useState(0);
 
-  const { updateAF, toggleDInput, setToD, toggleSInput, setToS } = useFruitActions();
+  const { fruit, updateAF } = v;
 
   const { qty, delivered } = fruit;
+  const nQty = parseInt(qty, 10);
+  const nDelivered = parseInt(delivered, 10);
 
   const qtyHandler = (value) => {
     if (value) {
       // eslint-disable-next-line no-param-reassign
       value = parseInt(value, 10);
       if (plus) {
-        updateAF("qty", qty + value);
-      } else if (value <= qty && qty > 0) {
-        updateAF("qty", qty - value);
-        updateAF("delivered", parseInt(delivered, 10) + value);
+        const plusValue = { qty: nQty + value };
+        updateAF(plusValue, send);
+      } else if (value <= nQty && qty > 0) {
+        const minusValue = { qty: nQty - value, delivered: nDelivered + value };
+        updateAF(minusValue, send);
       } else {
         toast("There is not enough stock");
       }
@@ -54,13 +60,12 @@ const useQuantity = (plus) => {
   const doubleClickHandler = () => {
     if (plus) {
       if (!restockInput) {
-        updateAF("qty", qty - 2);
+        updateAF({ qty: nQty - 2 }, send);
         toggleSInput();
         setToS(0);
       }
     } else if (!deliverInput && qty > 0) {
-      updateAF("qty", qty + 2);
-      updateAF("delivered", delivered - 2);
+      updateAF({ qty: nQty + 2, delivered: nDelivered - 2 }, send);
       toggleDInput();
       setToD(0);
     }
@@ -75,6 +80,10 @@ const useQuantity = (plus) => {
   };
 
   return {
+    deliverInput,
+    restockInput,
+    toDeliver,
+    toStock,
     qtyHandler,
     blurHandler,
     clickHandler,

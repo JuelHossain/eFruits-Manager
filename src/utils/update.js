@@ -1,7 +1,7 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const update = (newFruit, id, message) => {
+const update = (id, newFruit, message) => {
   const url = `/fruits/${id}`;
   // sending data to the server
   axios.put(url, newFruit).then((res) => {

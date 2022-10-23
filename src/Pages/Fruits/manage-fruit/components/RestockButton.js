@@ -1,13 +1,19 @@
 /* eslint-disable jsx-a11y/no-autofocus */
 import React from "react";
-import { useFruitContext } from "../../../../context/fruit-context/FruitContext";
-import useQuantity from "../../../../context/fruit-context/useQuantity";
+import { useFruitContext } from "../../../../context/FruitContext";
+import useQuantity from "../../../../Hooks/useQuantity";
 
 export default function RestockButton() {
-  const [{ restockInput, toStock }] = useFruitContext();
-
-  const { clickHandler, enterKeyHandler, doubleClickHandler, changeHandler, blurHandler } =
-    useQuantity(true);
+  const v = useFruitContext();
+  const {
+    clickHandler,
+    enterKeyHandler,
+    doubleClickHandler,
+    changeHandler,
+    blurHandler,
+    restockInput,
+    toStock
+  } = useQuantity(v, { plus: true });
 
   return (
     <input

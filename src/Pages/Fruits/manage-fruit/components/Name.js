@@ -1,10 +1,8 @@
 import React from "react";
-import { useFruitContext } from "../../../../context/fruit-context/FruitContext";
-import useFruitActions from "../../../../context/fruit-context/useFruitActions";
+import { useFruitContext } from "../../../../context/FruitContext";
 
 export default function Name() {
-  const { updateF } = useFruitActions();
-  const [{ fruit }] = useFruitContext();
+  const { fruit, updateF } = useFruitContext();
 
   return (
     <div className="w-full">

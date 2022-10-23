@@ -1,16 +1,9 @@
-import React, { useReducer, useRef } from "react";
-import { useFruitContext } from "../../../../context/fruit-context/FruitContext";
-import useFruitActions from "../../../../context/fruit-context/useFruitActions";
+import React, { useReducer } from "react";
+import { useFruitContext } from "../../../../context/FruitContext";
 
 export default function Photo() {
   const [show, toggle] = useReducer((state) => !state, false);
-  const [
-    {
-      fruit: { photo }
-    }
-  ] = useFruitContext();
-  const { updateF } = useFruitActions();
-  const photoUrlRef = useRef(null);
+  const { fruit: { photo } = {}, updateF } = useFruitContext();
 
   return (
     <div
@@ -25,7 +18,6 @@ export default function Photo() {
           className=" focus:outline-pink-500 absolute h-36 w-full border p-4 text-xl bottom-0 left-0"
           value={photo}
           name="photo"
-          ref={photoUrlRef}
           type="text"
           onChange={updateF}
         />

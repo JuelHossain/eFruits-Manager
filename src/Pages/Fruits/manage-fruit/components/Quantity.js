@@ -1,15 +1,12 @@
 import React from "react";
-import { useFruitContext } from "../../../../context/fruit-context/FruitContext";
-import useFruitActions from "../../../../context/fruit-context/useFruitActions";
+import { useFruitContext } from "../../../../context/FruitContext";
 
 import DeliveredButton from "./DeliveredButton";
 import RestockButton from "./RestockButton";
 
 function Quantity() {
-  const [{ fruit }] = useFruitContext();
-  const { updateF } = useFruitActions();
+  const { fruit: { qty, weight } = {}, updateF } = useFruitContext();
 
-  const { qty, weight } = fruit;
   const per = weight?.toLowerCase().includes("p") ? "Pcs" : "Kg";
   return (
     <>

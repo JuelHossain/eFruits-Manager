@@ -1,7 +1,5 @@
-import { useFruitContext } from "../../../context/fruit-context/FruitContext";
-
-export default function Photo() {
-  const [{ fruit }] = useFruitContext();
+export default function Photo({ v }) {
+  const { fruit } = v;
   const { name, photo } = fruit;
   return (
     <td className="flex gap-6 items-center w-42">

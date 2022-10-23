@@ -1,9 +1,9 @@
 import React from "react";
-import { useFruitContext } from "../../../../context/fruit-context/FruitContext";
+import { useFruitContext } from "../../../../context/FruitContext";
 
 export default function Delivered() {
-  const [{ fruit }] = useFruitContext();
-  const { delivered } = fruit;
+  const { fruit: { delivered } = {} } = useFruitContext();
+
   return (
     <div className="flex justify-center items-center h-20 relative w-full border text-xl font-bold ">
       <p className="text-xl font-bold ">
