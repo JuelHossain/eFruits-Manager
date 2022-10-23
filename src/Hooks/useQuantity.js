@@ -1,5 +1,8 @@
 import { useReducer, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import auth from "../firebase";
 
 const useQuantity = (v, options) => {
   const { plus, send } = options ?? {};
@@ -7,6 +10,8 @@ const useQuantity = (v, options) => {
   const [restockInput, toggleSInput] = useReducer((st) => !st, false);
   const [toDeliver, setToD] = useState(0);
   const [toStock, setToS] = useState(0);
+  const [user] = useAuthState(auth);
+  const navigate = useNavigate();
 
   const { fruit, updateAF } = v;
 
@@ -48,12 +53,16 @@ const useQuantity = (v, options) => {
   };
 
   const clickHandler = () => {
-    if (plus) {
-      if (!restockInput) {
+    if (user) {
+      if (plus) {
+        if (!restockInput) {
+          qtyHandler(1);
+        }
+      } else if (!deliverInput) {
         qtyHandler(1);
       }
-    } else if (!deliverInput) {
-      qtyHandler(1);
+    } else {
+      navigate("/login");
     }
   };
 
