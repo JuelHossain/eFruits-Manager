@@ -5,7 +5,12 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import "./index.css";
 
-axios.defaults.baseURL = "https://efruits-management-server.vercel.app/";
+const token = localStorage.getItem("accessToken");
+axios.defaults.baseURL = "https://efruits-management-server.onrender.com";
+axios.defaults.headers = {
+  authorization: `Bearer ${token}`
+};
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>

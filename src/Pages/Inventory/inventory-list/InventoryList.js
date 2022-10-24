@@ -8,6 +8,7 @@ import Quantity from "./Quantity";
 
 function InventoryList({ id, refetch }) {
   const [values, loading] = useFruit(id);
+
   const newValues = { ...values, refetch };
   return (
     loading || (

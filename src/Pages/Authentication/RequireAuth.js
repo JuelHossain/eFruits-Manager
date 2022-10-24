@@ -11,16 +11,11 @@ export default function RequireAuth({ children }) {
   const location = useLocation();
 
   useEffect(() => {
-    if (user) {
-      axios("/", {
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("accessToken")}`
-        }
-      }).catch((err) => {
-        const { status } = err.response;
-        if (status === 403 || status === 401) {
-          signOut(auth);
-        }
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      axios().catch(() => {
+        signOut(auth);
+        localStorage.removeItem("accessToken");
       });
     }
   }, [user]);

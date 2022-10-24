@@ -22,8 +22,11 @@ export default function UserNav() {
           {user.displayName}
         </Link>
         <div className="relative">
-          <button type="button" className="relative" onClick={toggle}>
-            <span className="animate-ping absolute  h-full w-full rounded-full bg-sky-400 opacity-50" />
+          <button
+            type="button"
+            className="relative flex justify-center items-center"
+            onClick={toggle}>
+            <span className=" animate-ping absolute  h-full w-full rounded-full bg-sky-400 opacity-50" />
             {user.photoURL ? (
               <img
                 className="relative rounded-full h-8 sm:h-10 hover:animate-pulse "
@@ -77,5 +80,3 @@ export default function UserNav() {
     </div>
   );
 }
-
-

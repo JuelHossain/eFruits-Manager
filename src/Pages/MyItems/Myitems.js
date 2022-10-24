@@ -33,11 +33,11 @@ export default function MyItems() {
   return (
     <div className="container m-auto text-center mt-10 mb-20 p-10 shadow-xl">
       <div className="text-2xl h-16 flex justify-center items-center gap-8 mb-10">{navLists}</div>
-      <table className="flex justify-center mx-auto">
+      <table className="flex justify-center mx-auto flex-col gap-3">
         <tbody className="flex justify-center flex-col gap-2 w-full">
           <Outlet />
-          <TableFooter links={footerlinks} />
         </tbody>
+        <TableFooter links={footerlinks} />
       </table>
     </div>
   );
