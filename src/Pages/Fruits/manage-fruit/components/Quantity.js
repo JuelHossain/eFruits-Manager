@@ -13,10 +13,10 @@ function Quantity() {
       <div className="flex justify-center items-center h-20 relative w-full border text-3xl font-bold ">
         <p>Quantity</p>
       </div>
-      <div className="flex w-full h-20 justify-center items-center">
+      <div className="flex w-full h-20 justify-center items-center overflow-hidden flex-col sm:flex-row">
         {initial || <DeliveredButton />}
 
-        <div className="flex-1 h-full flex justify-center items-center border relative">
+        <div className="flex-1 min-w-[200px] h-full flex justify-center items-center border relative">
           <input
             required
             placeholder="Quantity here"

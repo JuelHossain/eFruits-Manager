@@ -22,7 +22,7 @@ function App() {
   }, [user]);
 
   return (
-    <div className="mx-auto text-stone-500 flex flex-col min-h-screen">
+    <div className="mx-auto text-stone-500 flex flex-col min-h-screen overflow-hidden">
       <Header />
       <Router />
       <ToastContainer />
