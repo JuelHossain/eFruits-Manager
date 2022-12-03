@@ -9,12 +9,15 @@ import FruitCard from "./FruitCard";
 
 function Fruits({ slice, hidden }) {
   const [size, setSize] = useState(12);
-  const [pageCount] = useCount(size);
+  const [pageCount, counting] = useCount(size);
   const [page, setPage] = useState(0);
-  const { fruits, loading } = useFruits(page, slice || size);
+  const { fruits, loading, error } = useFruits(page, slice || size);
 
-  if (loading) {
+  if (loading || counting) {
     return <Loading />;
+  }
+  if (error) {
+    return <p>{error}</p>;
   }
   return (
     <div className="container m-auto text-center mt-10 mb-20 px-2 sm:px-10 py-16 shadow-xl">

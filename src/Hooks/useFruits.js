@@ -14,6 +14,7 @@ const useFruits = (page, size) => {
         setLoading(false);
       })
       .catch(() => {
+        setLoading(false);
         setError("There was some server side Error");
       });
   }, [page, size, c]);

@@ -8,7 +8,7 @@ import InventoryList from "../Inventory/inventory-list/InventoryList";
 function UpdatedByUser() {
   const [user, loading] = useAuthState(auth);
 
-  const { fruits, loading: fruitsLoading, refetch } = useFruits();
+  const { fruits, loading: fruitsLoading, refetch, error } = useFruits();
 
   if (loading || fruitsLoading) {
     return (
@@ -18,6 +18,9 @@ function UpdatedByUser() {
         </td>
       </tr>
     );
+  }
+  if (error) {
+    return <tr>{error}</tr>;
   }
   return (
     <>
